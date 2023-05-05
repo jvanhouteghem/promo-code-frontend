@@ -1,8 +1,18 @@
+import {promoCodeGetApi} from "@/pages/api/promo-code/routes/promo-code-get.api";
+import {promoCodePostApi} from "@/pages/api/promo-code/routes/promo-code-post.api";
+import {MockedValue, PROMO_CODES} from "@/pages/api/promo-code/promo-code.model";
+import {promoCodePatchApi} from "@/pages/api/promo-code/routes/promo-code-patch.api";
+import {promoCodeDeleteApi} from "@/pages/api/promo-code/routes/promo-code-delete.api";
+
+const mockedValue: MockedValue = {
+    promoCodes: PROMO_CODES
+}
+
 const promoCodeApiMethods: any = {
-    GET: async (query: any, body: any) => (console.log('PromoCodeApi - GET', query, body)),
-    POST: async (query: any, body: any) => (console.log('PromoCodeApi - POST', query, body)),
-    PATCH: async (query: any, body: any) => (console.log('PromoCodeApi - PATCH', query, body)),
-    DELETE: async (query: any, body: any) => (console.log('PromoCodeApi - DELETE', query, body)),
+    GET: async (query: any, body: any) => promoCodeGetApi(query, body, mockedValue),
+    POST: async (query: any, body: any) => promoCodePostApi(query, body, mockedValue),
+    PATCH: async (query: any, body: any) => promoCodePatchApi(query, body, mockedValue),
+    DELETE: async (query: any, body: any) => promoCodeDeleteApi(query, body, mockedValue),
 }
 
 export default async function PromoCodeApi(req: any, res: any) {
