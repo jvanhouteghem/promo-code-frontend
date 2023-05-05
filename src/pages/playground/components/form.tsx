@@ -1,4 +1,4 @@
-import {MOCK_FORM_NESTED_HORIZONTAL} from "@/pages/promo-code/create/components/form-catalog.model";
+import {MOCK_FORM_NESTED_HORIZONTAL} from "@/pages/playground/components/form-catalog.model";
 import { FORM_CONTEXT } from "react-form-catalog";
 import { FormFactoryComponent } from "react-form-catalog";
 
