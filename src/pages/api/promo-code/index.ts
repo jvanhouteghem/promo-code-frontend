@@ -4,6 +4,7 @@ import {MockedValue, PROMO_CODES} from "@/pages/api/promo-code/promo-code.model"
 import {promoCodePatchApi} from "@/pages/api/promo-code/routes/promo-code-patch.api";
 import {promoCodeDeleteApi} from "@/pages/api/promo-code/routes/promo-code-delete.api";
 
+// warning: mocked value
 const mockedValue: MockedValue = {
     promoCodes: PROMO_CODES
 }
