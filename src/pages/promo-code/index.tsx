@@ -43,10 +43,18 @@ export default function PromoCodePage(): JSX.Element {
     let [orderSummaryItems, setOrderSummaryItems] = useState(orderSummaryItemsMocked)
 
     const changeQuantity = (index, newQuantity) => {
-        const newItems = [...orderSummaryItems]; // Create a copy of the items array
-        newItems[index].quantity = newQuantity; // Update the quantity of the item at the given index
-        setOrderSummaryItems(newItems); // Set the state to the new items array
+        const newItems = [...orderSummaryItems];
+        if (newQuantity > 0) {
+            newItems[index].quantity = newQuantity;
+            setOrderSummaryItems(newItems);
+        }
     };
+
+    const removeOrder = (index: number) => {
+        setOrderSummaryItems((
+            orderSummaryItems: OrderSummaryItem[]) => orderSummaryItems.filter((orderSummaryItem, orderSummaryItemIndex) => orderSummaryItemIndex !== index)
+        );
+    }
 
     return (
         <>
@@ -54,7 +62,7 @@ export default function PromoCodePage(): JSX.Element {
                  <div className="PromoCodePage--card-ship-items">
                          {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, orderSummaryItemIndex: number) =>
                              <div key={orderSummaryItemIndex} className="item">
-                                 <CardShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity}/>
+                                 <CardShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder}/>
                              </div>
                          )}
                  </div>

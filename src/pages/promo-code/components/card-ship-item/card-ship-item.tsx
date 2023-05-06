@@ -1,7 +1,9 @@
 import './card-ship-item.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
 
-export function CardShipItemPage({orderSummaryItem, changeQuantity, orderSummaryItemIndex}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number}): JSX.Element {
+export function CardShipItemPage(
+    {orderSummaryItem, changeQuantity, orderSummaryItemIndex, removeOrder}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number, removeOrder: Function}
+): JSX.Element {
     return (
         <>
             <div className="CardShipItemPage--container">
@@ -21,7 +23,7 @@ export function CardShipItemPage({orderSummaryItem, changeQuantity, orderSummary
                         <div className="price-and-actions">
                             <div className="price">${orderSummaryItem.price.toFixed(2)}</div>
                             <div className="actions">
-                                <div className="action-icon">🗑️</div>
+                                <div onClick={() => removeOrder(orderSummaryItemIndex)} className="action-icon">🗑️</div>
                                 <button onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</button>
                                 <div className="action-counter">{orderSummaryItem.quantity}</div>
                                 <button onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</button>
