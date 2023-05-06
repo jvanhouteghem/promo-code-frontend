@@ -13,6 +13,9 @@
 - **React-Query**
 - **grid/filter**: https://mui.com/x/react-data-grid/filtering/ --> TODO pro cons (ex cons: responsive ko)
 
+## Good practices: 
+- **Be careful about good error messages** ([link](https://uxplanet.org/how-to-write-good-error-messages-858e4551cd4))
+
 ## Inspiration sources UI UX:
 
 #### [Hey James!](https://dribbble.com/shots/14677586-CouponsCoupons)
