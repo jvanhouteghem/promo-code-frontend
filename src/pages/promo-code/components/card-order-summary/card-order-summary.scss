@@ -28,4 +28,13 @@
     }
   }
 
+  .sum-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    .price {
+      font-weight: bold;
+    }
+  }
+
 }

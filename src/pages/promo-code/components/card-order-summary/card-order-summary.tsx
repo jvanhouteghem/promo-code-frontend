@@ -1,30 +1,14 @@
 import './card-order-summary.scss'
+import {OrderSummaryItem} from "@/pages/promo-code";
 
-interface OrderSummaryItem {
-    quantity: number
-    label: string;
-    price: number;
-}
 
-export function CardOrderSummaryPage(): JSX.Element {
 
-    const OrderSummaryItems: OrderSummaryItem[] = [
-        {
-            quantity: 2,
-            label: 'Acne Fighting Toner',
-            price: 14.25
-        },
-        {
-            quantity: 2,
-            label: 'Radiance boosting Toner',
-            price: 12.50
-        },
-        {
-            quantity: 2,
-            label: 'Hydrating Toner',
-            price: 13.00
-        }
-    ]
+export function CardOrderSummaryPage({orderSummaryItems}): JSX.Element {
+
+
+    function sum(OrderSummaryItems: OrderSummaryItem[]) {
+        return OrderSummaryItems.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
+    }
 
     return (
         <>
@@ -33,7 +17,7 @@ export function CardOrderSummaryPage(): JSX.Element {
                 <div className="ship-items-container">
                     <div className="ship-items">
                         <div className="title">Order Summary</div>
-                            {OrderSummaryItems.map((orderSummaryItem: OrderSummaryItem, index: number) => (
+                            {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, index: number) => (
                                 <div key={index} className="ship-item">
                                     <div className="quantity-and-label">
                                         <div className="quantity">x{orderSummaryItem.quantity}</div>
@@ -43,6 +27,11 @@ export function CardOrderSummaryPage(): JSX.Element {
                                 </div>
                             ))}
                     </div>
+                </div>
+
+                <div className="sum-total">
+                    <div className="label">Order Total</div>
+                    <div className="price">${sum(orderSummaryItems)}</div>
                 </div>
 
 

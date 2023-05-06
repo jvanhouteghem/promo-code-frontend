@@ -1,6 +1,7 @@
 import './card-ship-item.scss'
+import {OrderSummaryItem} from "@/pages/promo-code";
 
-export function CardShipItemPage(): JSX.Element {
+export function CardShipItemPage({orderSummaryItem, changeQuantity, orderSummaryItemIndex}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number}): JSX.Element {
     return (
         <>
             <div className="CardShipItemPage--container">
@@ -12,18 +13,18 @@ export function CardShipItemPage(): JSX.Element {
                     <div className="side-left"><img src="https://picsum.photos/500/500" /></div>
                     <div className="side-right">
                         <div className="text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id eros ac risus aliquet convallis. Ut ut nisl lectus. In sed egestas neque, et suscipit libero.
+                            {orderSummaryItem.description}
                         </div>
                         <div className="tags">
-                            <div className="tag">Size: 100ml</div>
+                            <div className="tag">{orderSummaryItem.tags[0]}</div>
                         </div>
                         <div className="price-and-actions">
-                            <div className="price">$14.25</div>
+                            <div className="price">${orderSummaryItem.price.toFixed(2)}</div>
                             <div className="actions">
                                 <div className="action-icon">🗑️</div>
-                                <div className="action-counter-button">-</div>
-                                <div className="action-counter">2</div>
-                                <div className="action-counter-button">+</div>
+                                <button onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</button>
+                                <div className="action-counter">{orderSummaryItem.quantity}</div>
+                                <button onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</button>
                             </div>
                         </div>
                     </div>
