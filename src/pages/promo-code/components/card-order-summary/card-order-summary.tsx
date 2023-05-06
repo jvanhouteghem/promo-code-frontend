@@ -27,10 +27,12 @@ export function CardOrderSummaryPage({orderSummaryItems}): JSX.Element {
 
                 setTimeout(() => {
                     setIsDebounce(false);
-                    if (promoCode === 'promo') {
-                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: null, color: "success", focused: true})
+                    if (!promoCode) {
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
+                    } else if (promoCode === 'promo') {
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: "A 10% discount has been applied!", color: "success", focused: true});
                     } else {
-                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: true, helperText:"Please add a valid promo code.", color: null, focused: null})
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: true, helperText:"Please add a valid promo code.", color: null, focused: null});
                     }
                 }, 1500)
 
@@ -39,6 +41,8 @@ export function CardOrderSummaryPage({orderSummaryItems}): JSX.Element {
             return () => {
                 clearTimeout(handler);
             };
+        } else {
+            setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
         }
     }, [promoCode]);
 
