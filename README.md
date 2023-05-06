@@ -15,6 +15,12 @@
 
 ## Inspiration sources UI UX:
 
+#### [Hey James!](https://dribbble.com/shots/14677586-CouponsCoupons)
+![image](https://cdn.dribbble.com/users/251359/screenshots/14677586/media/b56bdb130fa0dbcc8d81ba8506ad3730.png)
+
 #### [RM dashboard — Untitled UI](https://dribbble.com/shots/18567097-CRM-dashboard-Untitled-UI)
 
 ![image](https://cdn.dribbble.com/userupload/2960625/file/original-42deb2e9bedff93d05e2cbf08000afa3.jpg?compress=1&resize=752x)
+
+#### [SkinnyGlow - My Cart Page](https://dribbble.com/shots/20991067-SkinnyGlow-My-Cart-Page)
+![image](https://cdn.dribbble.com/userupload/5552497/file/original-5c31202465023edb5fda3fa9e9b7160f.png?compress=1&resize=752x)
