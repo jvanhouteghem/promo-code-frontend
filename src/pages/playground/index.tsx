@@ -1,5 +1,5 @@
 import PromoCodeForm from "@/pages/playground/components/form";
-import './promo-code.scss'
+import './playground.scss'
 
 export default function PlaygroundPage(): JSX.Element {
     return (
