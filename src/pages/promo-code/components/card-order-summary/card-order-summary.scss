@@ -1,0 +1,32 @@
+.CardOrderSummmaryPage--container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  .ship-items-container {
+    .ship-items {
+      .title {
+        font-size: 22px;
+      }
+      .ship-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        color: darkgray;
+
+        .quantity-and-label {
+          display: flex;
+          display: flex;
+          gap: 20px;
+          .quantity {
+
+          }
+          .label {
+
+          }
+        }
+      }
+    }
+  }
+
+}
