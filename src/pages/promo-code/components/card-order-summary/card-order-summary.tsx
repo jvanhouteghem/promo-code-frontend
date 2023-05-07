@@ -1,22 +1,25 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {Box, CircularProgress, TextField} from "@mui/material";
 
-export function CardOrderSummaryPage({orderSummaryItems}): JSX.Element {
-    function sum(OrderSummaryItems: OrderSummaryItem[]): number {
-        const sumWithoutPromo = OrderSummaryItems.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
-        const isPromo = promoCodeValidatorAttributes?.error === false ? 0.9 : 1;
-        return sumWithoutPromo * isPromo
-    }
+// TODO add typing
+/*export interface PromoCodeValidatorAttributes {
+    label: string;
+    /!*error: boolean | null;*!/
+    helperText: string | null;
+    color: string | null;
+    focused: boolean | null;
+}*/
 
-    function handleChange(event) {
-        setPromoCode(event.target.value);
-    }
-
+export function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
     const [promoCode, setPromoCode] = useState('')
-    const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState({
+    const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
         label:"Add promo code here.",
+        error: null,
+        helperText: null,
+        color: null,
+        focused: null
     })
 
     const [îsDebounce, setIsDebounce] = useState(false);
@@ -46,7 +49,17 @@ export function CardOrderSummaryPage({orderSummaryItems}): JSX.Element {
         }
     }, [promoCode]);
 
-    function handleSubmit(event) {
+    function sum(OrderSummaryItems: OrderSummaryItem[]): number {
+        const sumWithoutPromo = OrderSummaryItems.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
+        const isPromo = promoCodeValidatorAttributes?.error === false ? 0.9 : 1;
+        return sumWithoutPromo * isPromo
+    }
+
+    function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        setPromoCode(event.target.value);
+    }
+
+    function handleSubmit(event: any) { // React.FormEvent
         event.preventDefault()
         console.log('handleSubmit', event)
         alert('handleSubmit')

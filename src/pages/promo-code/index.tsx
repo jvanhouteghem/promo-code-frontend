@@ -42,7 +42,7 @@ export default function PromoCodePage(): JSX.Element {
     ];
     let [orderSummaryItems, setOrderSummaryItems] = useState(orderSummaryItemsMocked)
 
-    const changeQuantity = (index, newQuantity) => {
+    const changeQuantity = (index: number, newQuantity: number) => {
         const newItems = [...orderSummaryItems];
         if (newQuantity > 0) {
             newItems[index].quantity = newQuantity;
