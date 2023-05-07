@@ -1,15 +1,23 @@
+import {OrderSummaryItemsMocked} from "./../../../src/pages/promo-code/promo-code.mock";
+import {OrderSummaryItem} from "@/pages/promo-code";
+
 describe('promo-code', () => {
     beforeEach(() => {
-        cy.visit('/promo-code')
+        localStorage.setItem('orderSummaryItems', JSON.stringify(OrderSummaryItemsMocked));
+        cy.visit('/promo-code');
     })
 
     it('display the right number of cart items with the correct default values', () => {
+        const orders: OrderSummaryItem[] =  JSON.parse(localStorage.getItem('orderSummaryItems'));
         // test number of displayed cards
-        cy.get('[data-test-id^="cardShipItem-"]').should('have.length', 3);
+        cy.get('[data-test-id^="cardShipItem-"]').should('have.length', orders.length);
 
-        // test default displayed value of cart counters
-        cy.get('[data-test-id="cardShipItemQuantityCounter-0"]').should('have.text', 2);
+        // test default values inside orders cards
+        for (let i = 0; i < orders.length; i++) {
+            cy.get(`[data-test-id="cardShipItemQuantityCounter-${i}"]`).should('have.text', orders[i].quantity);
+            cy.get(`[data-test-id="cardShipItemPrice-${i}"]`).should('have.text', `$${orders[i].price.toFixed(2)}`);
+        }
 
-        cy.get('[data-test-id="cardShipItemPrice-0"]').should('have.text', '$14.25');
+        // test default value displayed in order summary
     })
 })

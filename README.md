@@ -13,6 +13,7 @@
 - **React-Query**
 - **grid/filter**: https://mui.com/x/react-data-grid/filtering/ --> TODO pro cons (ex cons: responsive ko)
 - **Cypress**: E2E testing
+- **File naming**: [Google JS style guide](https://google.github.io/styleguide/jsguide.html#file-name)
 --------- TODO ---------
 - **CI/CD with git actions**
 
