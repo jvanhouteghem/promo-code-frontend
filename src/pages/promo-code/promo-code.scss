@@ -1,0 +1,17 @@
+.PromoCodePage--container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .PromoCodePage--card-ship-items {
+    flex: 1;
+  }
+
+  .PromoCodePage--order-summary {
+    flex: 1;
+    border: 1px solid red;
+
+    @media (min-width:700px) {
+      max-width: 350px;
+    }
+  }
+}

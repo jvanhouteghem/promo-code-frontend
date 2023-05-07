@@ -12,6 +12,17 @@
 - **SASS**
 - **React-Query**
 - **grid/filter**: https://mui.com/x/react-data-grid/filtering/ --> TODO pro cons (ex cons: responsive ko)
+--------- TODO ---------
+- **CI/CD with git actions**
+
+## CORE Concepts
+- DRY (ex: use header layout)
+- "Scaling" app
+- Clean console
+
+## Good practices: 
+- **Be careful about good error messages** ([link](https://uxplanet.org/how-to-write-good-error-messages-858e4551cd4))
+- **Folders clean architecture**
 
 ## Inspiration sources UI UX:
 
