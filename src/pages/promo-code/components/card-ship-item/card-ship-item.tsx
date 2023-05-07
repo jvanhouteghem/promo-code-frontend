@@ -6,7 +6,7 @@ export function CardShipItemPage(
 ): JSX.Element {
     return (
         <>
-            <div className="CardShipItemPage--container">
+            <div data-test-id={`cardShipItem-${orderSummaryItemIndex}`} className="CardShipItemPage--container">
                 <div className="CardShipItemPage--container-header">
                     <div className="title">Acne-Fighting Toner</div>
                     <div className="subtitle">Tener Category</div>
@@ -21,12 +21,12 @@ export function CardShipItemPage(
                             <div className="tag">{orderSummaryItem.tags[0]}</div>
                         </div>
                         <div className="price-and-actions">
-                            <div className="price">${orderSummaryItem.price.toFixed(2)}</div>
+                            <div data-test-id={`cardShipItemPrice-${orderSummaryItemIndex}`} className="price">${orderSummaryItem.price.toFixed(2)}</div>
                             <div className="actions">
                                 <div onClick={() => removeOrder(orderSummaryItemIndex)} className="action-icon">🗑️</div>
-                                <button onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</button>
-                                <div className="action-counter">{orderSummaryItem.quantity}</div>
-                                <button onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</button>
+                                <button data-test-id={`cardShipItemQuantityIncrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</button>
+                                <div data-test-id={`cardShipItemQuantityCounter-${orderSummaryItemIndex}`} className="action-counter">{orderSummaryItem.quantity}</div>
+                                <button data-test-id={`cardShipItemQuantityDecrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</button>
                             </div>
                         </div>
                     </div>

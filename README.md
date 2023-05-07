@@ -12,6 +12,7 @@
 - **SASS**
 - **React-Query**
 - **grid/filter**: https://mui.com/x/react-data-grid/filtering/ --> TODO pro cons (ex cons: responsive ko)
+- **Cypress**: E2E testing
 --------- TODO ---------
 - **CI/CD with git actions**
 
