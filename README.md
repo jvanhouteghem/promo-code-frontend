@@ -18,6 +18,7 @@
 ## CORE Concepts
 - DRY (ex: use header layout)
 - "Scaling" app
+- Clean console
 
 ## Good practices: 
 - **Be careful about good error messages** ([link](https://uxplanet.org/how-to-write-good-error-messages-858e4551cd4))
