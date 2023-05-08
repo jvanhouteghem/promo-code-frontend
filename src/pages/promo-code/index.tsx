@@ -39,6 +39,8 @@ export default function PromoCodePage(): JSX.Element {
         }
     };
 
+    const isRemoveOrderEnabled: boolean = orderSummaryItems?.length > 1;
+
     const removeOrder = (index: number) => {
         console.log('orderSummaryItems', orderSummaryItems)
         let newOrders = orderSummaryItems.filter((orderSummaryItem, orderSummaryItemIndex) => orderSummaryItemIndex !== index);
@@ -58,7 +60,7 @@ export default function PromoCodePage(): JSX.Element {
                     <div className="PromoCodePage--card-ship-items">
                         {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, orderSummaryItemIndex: number) =>
                             <div key={orderSummaryItemIndex} className="item">
-                                <CardShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder}/>
+                                <CardShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder} isRemoveOrderEnabled={isRemoveOrderEnabled}/>
                             </div>
                         )}
                     </div>

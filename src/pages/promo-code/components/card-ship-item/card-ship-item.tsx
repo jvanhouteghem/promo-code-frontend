@@ -4,7 +4,7 @@ import {Button, Chip} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function CardShipItemPage(
-    {orderSummaryItem, changeQuantity, orderSummaryItemIndex, removeOrder}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number, removeOrder: Function}
+    {orderSummaryItem, changeQuantity, orderSummaryItemIndex, removeOrder, isRemoveOrderEnabled}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number, removeOrder: Function, isRemoveOrderEnabled: boolean}
 ): JSX.Element {
 
     const counterButtonStyle = {
@@ -34,9 +34,11 @@ export default function CardShipItemPage(
                         <div className="price-and-actions">
                             <div data-test-id={`cardShipItemPrice-${orderSummaryItemIndex}`} className="price">${orderSummaryItem.price.toFixed(2)}</div>
                             <div className="actions">
-                                <div onClick={() => removeOrder(orderSummaryItemIndex)} className="action-icon">
-                                    <DeleteIcon />
-                                </div>
+                                {isRemoveOrderEnabled &&
+                                    <div onClick={() => isRemoveOrderEnabled && removeOrder(orderSummaryItemIndex)} className="action-icon">
+                                        <DeleteIcon />
+                                    </div>
+                                }
                                 <Button style={counterButtonStyle} variant="outlined" data-test-id={`cardShipItemQuantityDecrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</Button>
                                 <div data-test-id={`cardShipItemQuantityCounter-${orderSummaryItemIndex}`} className="action-counter">{orderSummaryItem.quantity}</div>
                                 <Button style={counterButtonStyle} variant="outlined" data-test-id={`cardShipItemQuantityIncrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</Button>
