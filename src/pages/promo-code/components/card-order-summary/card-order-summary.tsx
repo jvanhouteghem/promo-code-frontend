@@ -5,29 +5,31 @@ import {Box, CircularProgress, TextField} from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
 
 export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
-    const [promoCode, setPromoCode] = useState('')
-    const [promoCodeFetched, setPromoCodeFetched] = useState<{ value?: any }>({})
+    const [promoCode, setPromoCode] = useState('');
+    const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
         label:"Add promo code here.",
         error: null,
         helperText: null,
         color: null,
         focused: null
-    })
+    });
+
+    const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
 
     const [isCheckingPromoCode, setIsCheckingPromoCode] = useState(false);
     useEffect(() => {
         if (promoCode) {
             const handler = setTimeout(() => {
                 setIsCheckingPromoCode(true);
-
-                checkPromoCode(promoCode).then(data => {
+                checkPromoCode(promoCode, sumWithoutPromo).then(data => {
                     setIsCheckingPromoCode(false);
                     setPromoCodeFetched(data);
+                    console.log('promoCodeFetched', data)
                     if (!promoCode) {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
-                    } else if (data?.status === 'OPEN') {
-                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: "A 10% discount has been applied!", color: "success", focused: true});
+                    } else if (data.isValid) {
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: `A ${data.value.amount * 100}% discount has been applied!`, color: "success", focused: true});
                     } else {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: true, helperText:"Please add a valid promo code.", color: null, focused: null});
                     }
@@ -43,10 +45,9 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
     }, [promoCode]);
 
     function sum(orderSummaryItems: OrderSummaryItem[]): number {
-        const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
-        console.log('promoCodeFetched', promoCodeFetched)
-        const isPromo = promoCodeValidatorAttributes?.error === false && promoCodeFetched.value.type === 'REDUCTION' ? promoCodeFetched.value.amountMultiplicator : 1;
-        return orderSummaryItems ? sumWithoutPromo * isPromo : 0;
+        // console.log('promoCodeFetched', promoCodeFetched)
+        // const isPromo = promoCodeValidatorAttributes?.error === false && promoCodeFetched.value.type === 'MULTIPLICATOR' ? promoCodeFetched.value.amount : 1;
+        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromo; // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
     }
 
     function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>

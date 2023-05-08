@@ -13,6 +13,7 @@ export interface PromoCode {
     code: string; // must be uniq
     counter: number; // the number of time a promoCode could be applied
     group: string; // each promo code are created by stack (group), example: WINTER_SALE
+    validators?: any; // TODO
     value: any; // should contain a number value, or an object (ex {action: 'GRANT_GIFT', value: 'ebook-777'}} or a key etc.
     emittedDate: Date; // creation date
     fillDate: Date; // reconciliation date
@@ -29,12 +30,13 @@ export interface PromoCode {
 export const PROMO_CODES: PromoCode[] = [
     {
         id: 123456,
-        code: 'promo',
+        code: 'promo10',
         counter: 10,
         group: 'WINTER_SALE',
+        validators: [{type: 'MIN_AMOUNT', value: 50}],
         value: {
-            type: 'REDUCTION',
-            amountMultiplicator: 0.9
+            type: 'MULTIPLICATOR',
+            amount: 0.1
         },
         emittedDate: new Date(),
         fillDate: new Date(),
@@ -43,12 +45,12 @@ export const PROMO_CODES: PromoCode[] = [
     },
     {
         id: 789112,
-        code: 'code1',
+        code: 'promo50',
         counter: 10,
         group: 'WINTER_SALE',
         value: {
-            type: 'REDUCTION',
-            amountMultiplicator: 0.5
+            type: 'MULTIPLICATOR',
+            amount: 0.5
         },
         emittedDate: new Date(),
         fillDate: new Date(),
