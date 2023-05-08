@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
 
-export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: Function}): JSX.Element {
+export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: any}): JSX.Element {
     const [promoCode, setPromoCode] = useState('');
     const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
