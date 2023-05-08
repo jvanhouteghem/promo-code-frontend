@@ -17,6 +17,6 @@ const promoCodeApiMethods: any = {
 }
 
 export default async function PromoCodeApi(req: any, res: any) {
-    let result = await promoCodeApiMethods[req.method](req.query, req.body)
-    res.json(result)
+    let result = await promoCodeApiMethods[req.method](req.query, req.body);
+    return res.json(result);
 }

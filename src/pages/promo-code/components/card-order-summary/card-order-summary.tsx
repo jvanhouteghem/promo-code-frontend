@@ -1,7 +1,9 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {Box, CircularProgress, TextField} from "@mui/material";
+import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
+import {useFetch} from "@/shared/hooks/fetch.hook";
 
 export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
     const [promoCode, setPromoCode] = useState('')
@@ -13,24 +15,23 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
         focused: null
     })
 
-    const [îsDebounce, setIsDebounce] = useState(false);
+    const [isCheckingPromoCode, setIsCheckingPromoCode] = useState(false);
     useEffect(() => {
         if (promoCode) {
             const handler = setTimeout(() => {
-                setIsDebounce(true);
+                setIsCheckingPromoCode(true);
 
-                setTimeout(() => {
-                    setIsDebounce(false);
+                checkPromoCode(promoCode).then(data => {
+                    setIsCheckingPromoCode(false);
                     if (!promoCode) {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
-                    } else if (promoCode === 'promo') {
+                    } else if (data) {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: "A 10% discount has been applied!", color: "success", focused: true});
                     } else {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: true, helperText:"Please add a valid promo code.", color: null, focused: null});
                     }
-                }, 1500)
-
-            }, 500);
+                });
+            }, 850);
 
             return () => {
                 clearTimeout(handler);
@@ -79,12 +80,13 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                         <Box sx={{ m: 1, position: 'relative' }}>
                         <TextField
                             id="outlined-error-helper-text"
+                            disabled={isCheckingPromoCode}
                             value={promoCode}
                             onChange={event => handleChange(event)}
                             {...promoCodeValidatorAttributes}
                         />
                         {/*{promoCodeValidatorAttributes?.error === false && <div>✅</div>}*/}
-                        {îsDebounce && <CircularProgress
+                        {isCheckingPromoCode && <CircularProgress
                             size={30}
                             sx={{
                                 position: 'absolute',

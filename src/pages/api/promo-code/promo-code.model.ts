@@ -29,7 +29,7 @@ export interface PromoCode {
 export const PROMO_CODES: PromoCode[] = [
     {
         id: 123456,
-        code: 'code0',
+        code: 'promo',
         counter: 10,
         group: 'group0',
         value: 'value0',
