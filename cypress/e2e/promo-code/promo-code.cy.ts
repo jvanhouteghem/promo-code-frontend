@@ -17,14 +17,7 @@ describe('promo-code default values', () => {
 describe('promo-code updating values', () => {
     beforeEach(() => {
         PromoCodePo.visit();
-    })
-
-    it('display the right number of cart items with the correct default values', () => {
-        PromoCodePo.checkOrderItems(PromoCodePo.getOrders());
-    })
-
-    it('display the right summary result values', () => {
-        PromoCodePo.checkSummary(PromoCodePo.getOrders(),'$54.00');
+        cy.get(`[data-test-id="DialogCongratsWelcomePromo"]`).click();
     })
 
     it('increment quantity of first item and check total x1', () => {

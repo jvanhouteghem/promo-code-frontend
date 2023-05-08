@@ -71,8 +71,6 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
         alert('handleSubmit')
     }
 
-    const [isDialogOpen, setIsDialogOpen] = useState(true)
-
     return (
         <>
             <form className="CardOrderSummmaryPage--container" onSubmit={event => handleSubmit(event)}>
@@ -126,27 +124,6 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
 
 
             </form>
-
-            <Dialog
-                open={isDialogOpen}
-                onClose={() => setIsDialogOpen(false)}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    Congrats!
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Hi ! Use <code>promo50</code> and get a 50% Welcome discount !
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setIsDialogOpen(false)} autoFocus>
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
         </>
     )
 }

@@ -4,6 +4,7 @@ import {useLocalStorage} from "@/shared/hooks/local-storage.hook";
 import {OrderSummaryItemsMocked} from "../../../cypress/e2e/promo-code/promo-code.mock";
 import CardShipItemPage from "@/pages/promo-code/components/card-ship-item/card-ship-item";
 import CardOrderSummaryPage from "@/pages/promo-code/components/card-order-summary/card-order-summary";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 
 export interface OrderSummaryItem {
     imgSrc: `http${string}`;
@@ -17,6 +18,7 @@ export interface OrderSummaryItem {
 export default function PromoCodePage(): JSX.Element {
     const [value, setValue] = useLocalStorage('orderSummaryItems', null);
     let [orderSummaryItems, setOrderSummaryItems] = useState([] as OrderSummaryItem[]);
+    const [isDialogOpen, setIsDialogOpen] = useState(true)
 
     useEffect(() => {
         // setValue(OrderSummaryItemsMocked)
@@ -65,6 +67,28 @@ export default function PromoCodePage(): JSX.Element {
                     </div>
                 </div>
             </div>
+
+
+            <Dialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    Congrats!
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Hi ! Use <code>promo50</code> and get a 50% Welcome discount !
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button data-test-id="DialogCongratsWelcomePromo" onClick={() => setIsDialogOpen(false)} autoFocus>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }
