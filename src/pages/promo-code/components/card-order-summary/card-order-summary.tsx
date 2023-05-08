@@ -51,9 +51,12 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
         }
     }, [promoCode, orderSummaryItems]);
 
+    function sumWithoutPromo(orderSummaryItems: OrderSummaryItem[]): number {
+        return orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
+    }
+
     function sum(orderSummaryItems: OrderSummaryItem[]): number {
-        const sumWithoutPromoo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
-        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromoo; // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
+        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromo(orderSummaryItems); // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
     }
 
     function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -63,6 +66,11 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
     function handleSubmit(event: any) { // React.FormEvent
         event.preventDefault()
         console.log('handleSubmit', event)
+    }
+
+    function reset() {
+        setPromoCode('');
+        resetOrders();
     }
 
     return (
@@ -104,6 +112,17 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
                     </Box>
                 </div>
 
+                <div className="sum-raw">
+                    <div className="label">Item sum</div>
+                    <div data-test-id={"cardOrderSummaryTotal"} className="price">${sumWithoutPromo(orderSummaryItems).toFixed(2)}</div>
+                </div>
+
+                {promoCodeFetched.result && <div className="sum-raw">
+                    <div className="label">Discount</div>
+                    <div data-test-id={"cardOrderSummaryTotal"}
+                         className="price">${(sumWithoutPromo(orderSummaryItems) - sum(orderSummaryItems)).toFixed(2)}</div>
+                </div>}
+
                 <div className="sum-total">
                     <div className="label">Order Total</div>
                     <div data-test-id={"cardOrderSummaryTotal"} className="price">${sum(orderSummaryItems).toFixed(2)}</div>
@@ -111,7 +130,7 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
 
                 <div>
                     <Button disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="contained">Submit</Button>
-                    <Button onClick={resetOrders} type="button" disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="outlined">reset</Button>
+                    <Button onClick={() => reset()} type="button" disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="outlined">reset</Button>
                 </div>
 
 
