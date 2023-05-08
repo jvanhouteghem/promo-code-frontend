@@ -109,7 +109,7 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                 </div>
 
                 <div>
-                    <Button style={{width: '100%', margin: '10px 0'}} variant="contained">Submit</Button>
+                    <Button disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="contained">Submit</Button>
                 </div>
 
 
