@@ -40,10 +40,10 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
         }
     }, [promoCode]);
 
-    function sum(OrderSummaryItems: OrderSummaryItem[]): number {
-        const sumWithoutPromo = OrderSummaryItems.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
+    function sum(orderSummaryItems: OrderSummaryItem[]): number {
+        const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
         const isPromo = promoCodeValidatorAttributes?.error === false ? 0.9 : 1;
-        return sumWithoutPromo * isPromo
+        return orderSummaryItems ? sumWithoutPromo * isPromo : 0;
     }
 
     function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -63,7 +63,7 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                 <div className="ship-items-container">
                     <div className="ship-items">
                         <div className="title">Order Summary</div>
-                            {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, index: number) => (
+                            {orderSummaryItems?.map((orderSummaryItem: OrderSummaryItem, index: number) => (
                                 <div key={index} className="ship-item">
                                     <div data-test-id={`cardOrderSummaryShipItemLabelAndQty-${index}`} className="quantity-and-label">
                                         <div className="quantity">x{orderSummaryItem.quantity}</div>

@@ -6,7 +6,7 @@ export default function CardShipItemPage(
 ): JSX.Element {
     return (
         <>
-            <div data-test-id={`cardShipItem-${orderSummaryItemIndex}`} className="CardShipItemPage--container">
+            {orderSummaryItem && <div data-test-id={`cardShipItem-${orderSummaryItemIndex}`} className="CardShipItemPage--container">
                 <div className="CardShipItemPage--container-header">
                     <div className="title">Acne-Fighting Toner</div>
                     <div className="subtitle">Tener Category</div>
@@ -31,7 +31,7 @@ export default function CardShipItemPage(
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> }
         </>
     )
 }
