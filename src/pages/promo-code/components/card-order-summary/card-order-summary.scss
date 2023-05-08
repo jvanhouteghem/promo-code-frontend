@@ -39,6 +39,12 @@
     }
   }
 
+  .sum-raw {
+    display: flex;
+    justify-content: space-between;
+    font-size: $font-m;
+  }
+
   .sum-total {
     display: flex;
     justify-content: space-between;

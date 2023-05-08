@@ -40,7 +40,7 @@ export default function CardShipItemPage(
                                 }
                                 <Button style={counterButtonStyle} variant="outlined" data-test-id={`cardShipItemQuantityDecrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</Button>
                                 <div data-test-id={`cardShipItemQuantityCounter-${orderSummaryItemIndex}`} className="action-counter">{orderSummaryItem.quantity}</div>
-                                <Button style={counterButtonStyle} variant="outlined" data-test-id={`cardShipItemQuantityIncrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</Button>
+                                <Button style={counterButtonStyle} variant="outlined" data-test-id={`cardShipItemQuantityIncrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">+</Button>
                             </div>
                         </div>
                     </div>
