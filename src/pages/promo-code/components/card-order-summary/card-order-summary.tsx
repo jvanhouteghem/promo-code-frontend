@@ -1,7 +1,7 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
 import {useEffect, useState} from "react";
-import {Box, CircularProgress, TextField} from "@mui/material";
+import {Box, Button, CircularProgress, TextField} from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
 
 export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
@@ -82,12 +82,13 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                 </div>
 
                 <div className="promo-code-input-container">
-                        <Box sx={{ m: 1, position: 'relative' }}>
+                        <Box sx={{ position: 'relative' }}>
                         <TextField
                             id="outlined-error-helper-text"
                             disabled={isCheckingPromoCode}
                             value={promoCode}
                             onChange={event => handleChange(event)}
+                            style={{width: '100%'}}
                             {...promoCodeValidatorAttributes}
                         />
                         {/*{promoCodeValidatorAttributes?.error === false && <div>✅</div>}*/}
@@ -108,7 +109,7 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                 </div>
 
                 <div>
-                    <button type="submit">Submit</button>
+                    <Button style={{width: '100%', margin: '10px 0'}} variant="contained">Submit</Button>
                 </div>
 
 
