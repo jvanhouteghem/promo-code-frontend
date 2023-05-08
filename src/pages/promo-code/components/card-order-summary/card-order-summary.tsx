@@ -1,8 +1,93 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
-import {Button} from "@mui/material";
-import {PromoCode} from "@/pages/promo-code/components/card-order-summary/components/promo-code-input";
-import {usePromoCodeInput} from "@/pages/promo-code/components/card-order-summary/components/promo-code-input.hook";
+import {Box, Button, CircularProgress, TextField} from "@mui/material";
+import {useEffect, useState} from "react";
+import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
+
+export function usePromoCodeInput(orderSummaryItems: OrderSummaryItem[]) {
+    const [promoCode, setPromoCode] = useState('');
+    const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
+    const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
+        label:"Add promo code here.",
+        error: null,
+        helperText: null,
+        color: null,
+        focused: null
+    });
+
+    function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        setPromoCode(event.target.value);
+    }
+
+    const [isCheckingPromoCode, setIsCheckingPromoCode] = useState(false);
+    useEffect(() => {
+        if (promoCode) {
+            const handler = setTimeout(() => {
+                setIsCheckingPromoCode(true);
+                const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
+                checkPromoCode(promoCode, sumWithoutPromo).then((data: any) => {
+                    setIsCheckingPromoCode(false);
+                    setPromoCodeFetched(data);
+                    console.log('promoCodeFetched', data)
+                    if (!promoCode) {
+                        setPromoCodeFetched({});
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
+                    } else if (data.isValid) {
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: `A ${data.value.amount * 100}% discount has been applied!`, color: "success", focused: true});
+                    } else {
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: true, helperText:"Please add a valid promo code.", color: null, focused: null});
+                    }
+                });
+            }, 850);
+
+            return () => {
+                clearTimeout(handler);
+            };
+        } else {
+            setPromoCodeFetched({});
+            setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
+        }
+    }, [promoCode, orderSummaryItems]);
+
+    return {
+        promoCodeFetched,
+        promoCode,
+        setPromoCode,
+        isCheckingPromoCode ,
+        promoCodeValidatorAttributes,
+        handleChange
+    }
+}
+
+export function PromoCode({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
+    const {
+        promoCode,
+        isCheckingPromoCode ,
+        promoCodeValidatorAttributes,
+        handleChange
+    } = usePromoCodeInput(orderSummaryItems);
+
+    return <>
+        <Box sx={{ position: 'relative' }}>
+            <TextField
+                id="outlined-error-helper-text"
+                disabled={isCheckingPromoCode}
+                value={promoCode}
+                onChange={event => handleChange(event)}
+                style={{width: '100%'}}
+                {...promoCodeValidatorAttributes}
+            />
+            {isCheckingPromoCode && <CircularProgress
+                size={30}
+                sx={{
+                    position: 'absolute',
+                    marginTop: '13px',
+                    marginLeft: '-125px',
+                }}
+            />}
+        </Box>
+    </>
+}
 
 export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: any}): JSX.Element {
     const {promoCodeFetched, isCheckingPromoCode ,} = usePromoCodeInput(orderSummaryItems);
