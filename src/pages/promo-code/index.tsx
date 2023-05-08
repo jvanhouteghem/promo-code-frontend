@@ -1,7 +1,9 @@
 import './promo-code.scss'
 import {CardShipItemPage} from "@/pages/promo-code/components/card-ship-item/card-ship-item";
 import {CardOrderSummaryPage} from "@/pages/promo-code/components/card-order-summary/card-order-summary";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useLocalStorage} from "@/shared/hooks/local-storage.hook";
+import {OrderSummaryItemsMocked} from "../../../cypress/e2e/promo-code/promo-code.mock";
 
 export interface OrderSummaryItem {
     imgSrc: `http${string}`;
@@ -13,34 +15,13 @@ export interface OrderSummaryItem {
 }
 
 export default function PromoCodePage(): JSX.Element {
+    const [value, setValue] = useLocalStorage('orderSummaryItems', null);
+    let [orderSummaryItems, setOrderSummaryItems] = useState(OrderSummaryItemsMocked);
 
-    let orderSummaryItemsMocked: OrderSummaryItem[] = [
-        {
-            imgSrc: 'https://fastly.picsum.photos/id/365/500/500.jpg?hmac=BNC6PNKT44Ss5yNhNtiByMW1Mz4uM2V-ilk9FyBg9g0',
-            quantity: 2,
-            label: 'Acne Fighting Toner',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id eros ac risus aliquet convallis. Ut ut nisl lectus. In sed egestas neque, et suscipit libero.',
-            tags: ['Size: 100ml'],
-            price: 14.25
-        },
-        {
-            imgSrc: 'https://fastly.picsum.photos/id/267/500/500.jpg?hmac=EgYYR4vOAKPZRt-U_7pSsFpAooNhOlfQLhQccveylPI',
-            quantity: 1,
-            label: 'Radiance boosting Toner',
-            description: 'Sed sed tincidunt mauris. Cras malesuada gravida ultricies. Quisque nec justo in nisl egestas volutpat condimentum non velit.',
-            tags: ['Size: 100ml'],
-            price: 12.50
-        },
-        {
-            imgSrc: 'https://fastly.picsum.photos/id/669/500/500.jpg?hmac=Ai7DgV9Wwb9N65n5gwXVTXvZBiME_K96rlZGIhX5T50',
-            quantity: 1,
-            label: 'Hydrating Toner',
-            description: 'Lorem ipsum dolor sit amet.',
-            tags: ['Size: 100ml'],
-            price: 13.00
-        }
-    ];
-    let [orderSummaryItems, setOrderSummaryItems] = useState(orderSummaryItemsMocked)
+    useEffect(() => {
+        // setValue(OrderSummaryItemsMocked)
+        setOrderSummaryItems(value ?? []); // setOrderSummaryItems(value ?? OrderSummaryItemsMocked)
+    }, [orderSummaryItems]);
 
     const changeQuantity = (index: number, newQuantity: number) => {
         const newItems = [...orderSummaryItems];

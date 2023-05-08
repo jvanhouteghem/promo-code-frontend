@@ -12,13 +12,21 @@
 - **SASS**
 - **React-Query**
 - **grid/filter**: https://mui.com/x/react-data-grid/filtering/ --> TODO pro cons (ex cons: responsive ko)
+- **Cypress**: E2E testing
+- **File naming**: [Google JS style guide](https://google.github.io/styleguide/jsguide.html#file-name)
 --------- TODO ---------
 - **CI/CD with git actions**
+- **linter**
+- **tsrules**
 
-## CORE Concepts
+## App CORE Concepts
 - DRY (ex: use header layout)
 - "Scaling" app
 - Clean console
+
+## Tests CORE concepts
+- Readability + DRY: create Page Object class and use high order function in tests
+- custom data-test-id for selector (!data-cy) with uniq name
 
 ## Good practices: 
 - **Be careful about good error messages** ([link](https://uxplanet.org/how-to-write-good-error-messages-858e4551cd4))
