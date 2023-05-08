@@ -5,10 +5,6 @@ import {
     Box,
     Button,
     CircularProgress,
-    Dialog, DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
     TextField
 } from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
@@ -56,7 +52,6 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
     }, [promoCode, orderSummaryItems]);
 
     function sum(orderSummaryItems: OrderSummaryItem[]): number {
-        // console.log('sum - promoCodeFetched', promoCodeFetched)
         const sumWithoutPromoo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
         return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromoo; // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
     }
@@ -68,13 +63,11 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
     function handleSubmit(event: any) { // React.FormEvent
         event.preventDefault()
         console.log('handleSubmit', event)
-        alert('handleSubmit')
     }
 
     return (
         <>
             <form className="CardOrderSummmaryPage--container" onSubmit={event => handleSubmit(event)}>
-
                 <div className="ship-items-container">
                     <div className="ship-items">
                         <div className="title">Order Summary</div>
@@ -100,7 +93,6 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
                             style={{width: '100%'}}
                             {...promoCodeValidatorAttributes}
                         />
-                        {/*{promoCodeValidatorAttributes?.error === false && <div>✅</div>}*/}
                         {isCheckingPromoCode && <CircularProgress
                             size={30}
                             sx={{
