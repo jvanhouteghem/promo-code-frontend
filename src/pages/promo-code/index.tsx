@@ -18,8 +18,10 @@ export interface OrderSummaryItem {
 
 export default function PromoCodePage(): JSX.Element {
     const [value, setValue] = useLocalStorage('orderSummaryItems', null);
-    let [orderSummaryItems, setOrderSummaryItems] = useState([] as OrderSummaryItem[]);
-    const [isDialogOpen, setIsDialogOpen] = useState(true)
+    const [orderSummaryItems, setOrderSummaryItems] = useState([] as OrderSummaryItem[]);
+    const [isDialogOpen, setIsDialogOpen] = useState(true);
+
+    const isRemoveOrderEnabled: boolean = orderSummaryItems?.length > 1;
 
     useEffect(() => {
         // setValue(OrderSummaryItemsMocked)
@@ -40,22 +42,18 @@ export default function PromoCodePage(): JSX.Element {
         }
     };
 
-    const isRemoveOrderEnabled: boolean = orderSummaryItems?.length > 1;
-
     const removeOrder = (index: number) => {
-        console.log('orderSummaryItems', orderSummaryItems)
-        let newOrders = orderSummaryItems.filter((orderSummaryItem, orderSummaryItemIndex) => orderSummaryItemIndex !== index);
-        setValue(newOrders)
-        setOrderSummaryItems(newOrders)
+        const newOrders: OrderSummaryItem[] = orderSummaryItems.filter((orderSummaryItem, orderSummaryItemIndex) => orderSummaryItemIndex !== index);
+        setValue(newOrders);
+        setOrderSummaryItems(newOrders);
     }
 
     function resetOrders() {
-        setValue(OrderSummaryItemsMocked)
+        setValue(OrderSummaryItemsMocked);
     }
 
     return (
         <>
-            {/*<img src="/bg.png" alt="my image" />  style={{backgroundImage: `url('./bg.png')`}}*/}
             <div className="root-layout">
                 <div className="PromoCodePage--container">
                     <div className="PromoCodePage--card-ship-items">
