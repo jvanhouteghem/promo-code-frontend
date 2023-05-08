@@ -6,6 +6,7 @@ import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service
 
 export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
     const [promoCode, setPromoCode] = useState('')
+    const [promoCodeFetched, setPromoCodeFetched] = useState<{ value?: any }>({})
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
         label:"Add promo code here.",
         error: null,
@@ -22,6 +23,7 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
 
                 checkPromoCode(promoCode).then(data => {
                     setIsCheckingPromoCode(false);
+                    setPromoCodeFetched(data);
                     if (!promoCode) {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
                     } else if (data?.status === 'OPEN') {
@@ -42,7 +44,8 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
 
     function sum(orderSummaryItems: OrderSummaryItem[]): number {
         const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
-        const isPromo = promoCodeValidatorAttributes?.error === false ? 0.9 : 1;
+        console.log('promoCodeFetched', promoCodeFetched)
+        const isPromo = promoCodeValidatorAttributes?.error === false && promoCodeFetched.value.type === 'REDUCTION' ? promoCodeFetched.value.amountMultiplicator : 1;
         return orderSummaryItems ? sumWithoutPromo * isPromo : 0;
     }
 

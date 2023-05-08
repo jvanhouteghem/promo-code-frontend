@@ -31,19 +31,25 @@ export const PROMO_CODES: PromoCode[] = [
         id: 123456,
         code: 'promo',
         counter: 10,
-        group: 'group0',
-        value: 'value0',
+        group: 'WINTER_SALE',
+        value: {
+            type: 'REDUCTION',
+            amountMultiplicator: 0.9
+        },
         emittedDate: new Date(),
         fillDate: new Date(),
         expiry: new Date(),
-        status: PromoStatus.OPEN
+        status: PromoStatus.OPEN,
     },
     {
         id: 789112,
         code: 'code1',
         counter: 10,
-        group: 'group1',
-        value: 'value1',
+        group: 'WINTER_SALE',
+        value: {
+            type: 'REDUCTION',
+            amountMultiplicator: 0.5
+        },
         emittedDate: new Date(),
         fillDate: new Date(),
         expiry: new Date(),
