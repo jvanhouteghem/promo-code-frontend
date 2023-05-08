@@ -15,18 +15,19 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
         focused: null
     });
 
-    const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
 
     const [isCheckingPromoCode, setIsCheckingPromoCode] = useState(false);
     useEffect(() => {
         if (promoCode) {
             const handler = setTimeout(() => {
                 setIsCheckingPromoCode(true);
-                checkPromoCode(promoCode, sumWithoutPromo).then(data => {
+                const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
+                checkPromoCode(promoCode, sumWithoutPromo).then((data: any) => {
                     setIsCheckingPromoCode(false);
                     setPromoCodeFetched(data);
                     console.log('promoCodeFetched', data)
                     if (!promoCode) {
+                        setPromoCodeFetched({});
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
                     } else if (data.isValid) {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: `A ${data.value.amount * 100}% discount has been applied!`, color: "success", focused: true});
@@ -40,14 +41,15 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                 clearTimeout(handler);
             };
         } else {
+            setPromoCodeFetched({});
             setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
         }
-    }, [promoCode]);
+    }, [promoCode, orderSummaryItems]);
 
     function sum(orderSummaryItems: OrderSummaryItem[]): number {
-        // console.log('promoCodeFetched', promoCodeFetched)
-        // const isPromo = promoCodeValidatorAttributes?.error === false && promoCodeFetched.value.type === 'MULTIPLICATOR' ? promoCodeFetched.value.amount : 1;
-        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromo; // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
+        // console.log('sum - promoCodeFetched', promoCodeFetched)
+        const sumWithoutPromoo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
+        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromoo; // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
     }
 
     function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>

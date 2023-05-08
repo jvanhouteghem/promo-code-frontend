@@ -1,5 +1,3 @@
-import {PromoCode} from "@/pages/api/promo-code/promo-code.model";
-
 export async function checkPromoCode(promoCode: string, totalWithoutPromo: number) {
     const timeout: number = 2000;
 
