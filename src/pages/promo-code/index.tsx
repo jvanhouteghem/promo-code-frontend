@@ -23,6 +23,13 @@ export default function PromoCodePage(): JSX.Element {
         setOrderSummaryItems(value ?? []); // setOrderSummaryItems(value ?? OrderSummaryItemsMocked)
     }, [value, orderSummaryItems]);
 
+    useEffect(() => {
+        console.log('haaa', value)
+        if (value.length == 0) {
+            resetOrders();
+        }
+    }, [])
+
     const changeQuantity = (index: number, newQuantity: number) => {
         const newItems: OrderSummaryItem[] = [...orderSummaryItems];
         if (newItems.length > 0 && newQuantity > 0) {
