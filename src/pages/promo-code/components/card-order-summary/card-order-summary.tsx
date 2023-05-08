@@ -1,10 +1,15 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
-import {Box, Button, CircularProgress, TextField} from "@mui/material";
 import {useEffect, useState} from "react";
+import {
+    Box,
+    Button,
+    CircularProgress,
+    TextField
+} from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
 
-export function usePromoCodeInput(orderSummaryItems: OrderSummaryItem[]) {
+export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: any}): JSX.Element {
     const [promoCode, setPromoCode] = useState('');
     const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
@@ -15,9 +20,6 @@ export function usePromoCodeInput(orderSummaryItems: OrderSummaryItem[]) {
         focused: null
     });
 
-    function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-        setPromoCode(event.target.value);
-    }
 
     const [isCheckingPromoCode, setIsCheckingPromoCode] = useState(false);
     useEffect(() => {
@@ -49,52 +51,13 @@ export function usePromoCodeInput(orderSummaryItems: OrderSummaryItem[]) {
         }
     }, [promoCode, orderSummaryItems]);
 
-    return {
-        promoCodeFetched,
-        promoCode,
-        setPromoCode,
-        isCheckingPromoCode ,
-        promoCodeValidatorAttributes,
-        handleChange
-    }
-}
-
-export function PromoCode({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
-    const {
-        promoCode,
-        isCheckingPromoCode ,
-        promoCodeValidatorAttributes,
-        handleChange
-    } = usePromoCodeInput(orderSummaryItems);
-
-    return <>
-        <Box sx={{ position: 'relative' }}>
-            <TextField
-                id="outlined-error-helper-text"
-                disabled={isCheckingPromoCode}
-                value={promoCode}
-                onChange={event => handleChange(event)}
-                style={{width: '100%'}}
-                {...promoCodeValidatorAttributes}
-            />
-            {isCheckingPromoCode && <CircularProgress
-                size={30}
-                sx={{
-                    position: 'absolute',
-                    marginTop: '13px',
-                    marginLeft: '-45px',
-                }}
-            />}
-        </Box>
-    </>
-}
-
-export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: any}): JSX.Element {
-    const {promoCodeFetched, isCheckingPromoCode ,} = usePromoCodeInput(orderSummaryItems);
-
     function sum(orderSummaryItems: OrderSummaryItem[]): number {
         const sumWithoutPromoo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
-        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromoo;
+        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromoo; // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
+    }
+
+    function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        setPromoCode(event.target.value);
     }
 
     function handleSubmit(event: any) { // React.FormEvent
@@ -108,21 +71,38 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
                 <div className="ship-items-container">
                     <div className="ship-items">
                         <div className="title">Order Summary</div>
-                            {orderSummaryItems?.map((orderSummaryItem: OrderSummaryItem, index: number) => (
-                                <div key={index} className="ship-item">
-                                    <div data-test-id={`cardOrderSummaryShipItemLabelAndQty-${index}`} className="quantity-and-label">
-                                        <div className="quantity">x{orderSummaryItem.quantity}</div>
-                                        <div className="label">{orderSummaryItem.label}</div>
-                                    </div>
-                                    <div data-test-id={`cardOrderSummaryShipItemPrice-${index}`} className="price">${orderSummaryItem.price.toFixed(2)}</div>
+                        {orderSummaryItems?.map((orderSummaryItem: OrderSummaryItem, index: number) => (
+                            <div key={index} className="ship-item">
+                                <div data-test-id={`cardOrderSummaryShipItemLabelAndQty-${index}`} className="quantity-and-label">
+                                    <div className="quantity">x{orderSummaryItem.quantity}</div>
+                                    <div className="label">{orderSummaryItem.label}</div>
                                 </div>
-                            ))}
+                                <div data-test-id={`cardOrderSummaryShipItemPrice-${index}`}className="price">${orderSummaryItem.price.toFixed(2)}</div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
                 <div className="promo-code-input-container">
-                    <PromoCode orderSummaryItems={orderSummaryItems} />
-               </div>
+                    <Box sx={{ position: 'relative' }}>
+                        <TextField
+                            id="outlined-error-helper-text"
+                            disabled={isCheckingPromoCode}
+                            value={promoCode}
+                            onChange={event => handleChange(event)}
+                            style={{width: '100%'}}
+                            {...promoCodeValidatorAttributes}
+                        />
+                        {isCheckingPromoCode && <CircularProgress
+                            size={30}
+                            sx={{
+                                position: 'absolute',
+                                marginTop: '13px',
+                                marginLeft: '-125px',
+                            }}
+                        />}
+                    </Box>
+                </div>
 
                 <div className="sum-total">
                     <div className="label">Order Total</div>
