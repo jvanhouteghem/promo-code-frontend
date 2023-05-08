@@ -40,19 +40,21 @@ export default function PromoCodePage(): JSX.Element {
 
     return (
         <>
-             <div className="PromoCodePage--container">
-                 <div className="PromoCodePage--card-ship-items">
-                         {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, orderSummaryItemIndex: number) =>
-                             <div key={orderSummaryItemIndex} className="item">
-                                 <CardShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder}/>
-                             </div>
-                         )}
-                 </div>
-                 <div className="PromoCodePage--order-summary">
-                     <CardOrderSummaryPage orderSummaryItems={orderSummaryItems}/>
-                 </div>
-             </div>
-
+            {/*<img src="/bg.png" alt="my image" />  style={{backgroundImage: `url('./bg.png')`}}*/}
+            <div className="root-layout">
+                <div className="PromoCodePage--container">
+                    <div className="PromoCodePage--card-ship-items">
+                        {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, orderSummaryItemIndex: number) =>
+                            <div key={orderSummaryItemIndex} className="item">
+                                <CardShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder}/>
+                            </div>
+                        )}
+                    </div>
+                    <div className="PromoCodePage--order-summary">
+                        <CardOrderSummaryPage orderSummaryItems={orderSummaryItems}/>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
