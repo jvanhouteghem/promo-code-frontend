@@ -82,7 +82,7 @@ export function PromoCode({orderSummaryItems}: {orderSummaryItems: OrderSummaryI
                 sx={{
                     position: 'absolute',
                     marginTop: '13px',
-                    marginLeft: '-125px',
+                    marginLeft: '-45px',
                 }}
             />}
         </Box>
