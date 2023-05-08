@@ -81,10 +81,14 @@
           gap: 10px;
           justify-content: center;
           align-items: center;
-          .action-icon {}
+          color: rgba(0, 0, 0, 0.87);
+          .action-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
           .action-counter-button {}
           .action-counter {
-            color: rgba(0, 0, 0, 0.87);
             background-color: white;
           }
         }
