@@ -32,9 +32,10 @@ export default function PromoCodePage(): JSX.Element {
     };
 
     const removeOrder = (index: number) => {
-        setOrderSummaryItems((
-            orderSummaryItems: OrderSummaryItem[]) => orderSummaryItems.filter((orderSummaryItem, orderSummaryItemIndex) => orderSummaryItemIndex !== index)
-        );
+        console.log('orderSummaryItems', orderSummaryItems)
+        let newOrders = orderSummaryItems.filter((orderSummaryItem, orderSummaryItemIndex) => orderSummaryItemIndex !== index);
+        setValue(newOrders)
+        setOrderSummaryItems(newOrders)
     }
 
     return (
