@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  // background-color: #e9e9e9; // #fafafa; // #0a1430;
+  height: 100%;
 
   .ship-items-container {
     .ship-items {
@@ -11,8 +13,8 @@
       .ship-item {
         display: flex;
         justify-content: space-between;
-        font-size: 18px;
-        color: darkgray;
+        font-size: 16px;
+        color: rgb(33, 33, 33);
 
         .quantity-and-label {
           display: flex;

@@ -1,10 +1,19 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
 import {useEffect, useState} from "react";
-import {Box, CircularProgress, TextField} from "@mui/material";
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Dialog, DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    TextField
+} from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
 
-export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
+export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: any}): JSX.Element {
     const [promoCode, setPromoCode] = useState('');
     const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
@@ -62,6 +71,8 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
         alert('handleSubmit')
     }
 
+    const [isDialogOpen, setIsDialogOpen] = useState(true)
+
     return (
         <>
             <form className="CardOrderSummmaryPage--container" onSubmit={event => handleSubmit(event)}>
@@ -82,12 +93,13 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                 </div>
 
                 <div className="promo-code-input-container">
-                        <Box sx={{ m: 1, position: 'relative' }}>
+                        <Box sx={{ position: 'relative' }}>
                         <TextField
                             id="outlined-error-helper-text"
                             disabled={isCheckingPromoCode}
                             value={promoCode}
                             onChange={event => handleChange(event)}
+                            style={{width: '100%'}}
                             {...promoCodeValidatorAttributes}
                         />
                         {/*{promoCodeValidatorAttributes?.error === false && <div>✅</div>}*/}
@@ -108,11 +120,33 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                 </div>
 
                 <div>
-                    <button type="submit">Submit</button>
+                    <Button disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="contained">Submit</Button>
+                    <Button onClick={resetOrders} type="button" disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="outlined">reset</Button>
                 </div>
 
 
             </form>
+
+            <Dialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    Congrats!
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Hi ! Use <code>promo50</code> and get a 50% Welcome discount !
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setIsDialogOpen(false)} autoFocus>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }
