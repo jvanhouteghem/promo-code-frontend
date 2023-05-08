@@ -16,6 +16,8 @@
 - **File naming**: [Google JS style guide](https://google.github.io/styleguide/jsguide.html#file-name)
 --------- TODO ---------
 - **CI/CD with git actions**
+- **linter**
+- **tsrules**
 
 ## App CORE Concepts
 - DRY (ex: use header layout)
@@ -23,9 +25,8 @@
 - Clean console
 
 ## Tests CORE concepts
-- Each test should have high order function to make them readable
+- Readability + DRY: create Page Object class and use high order function in tests
 - custom data-test-id for selector (!data-cy) with uniq name
-- (DRY) all interactions should be in a Page Object file
 
 ## Good practices: 
 - **Be careful about good error messages** ([link](https://uxplanet.org/how-to-write-good-error-messages-858e4551cd4))
