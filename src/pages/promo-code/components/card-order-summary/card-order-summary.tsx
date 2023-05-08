@@ -1,9 +1,8 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Box, CircularProgress, TextField} from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
-import {useFetch} from "@/shared/hooks/fetch.hook";
 
 export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
     const [promoCode, setPromoCode] = useState('')
@@ -25,7 +24,7 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                     setIsCheckingPromoCode(false);
                     if (!promoCode) {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
-                    } else if (data) {
+                    } else if (data?.status === 'OPEN') {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: "A 10% discount has been applied!", color: "success", focused: true});
                     } else {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: true, helperText:"Please add a valid promo code.", color: null, focused: null});
