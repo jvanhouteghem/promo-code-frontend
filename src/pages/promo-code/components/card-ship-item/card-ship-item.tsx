@@ -18,18 +18,17 @@ export default function CardShipItemPage(
         <>
             {orderSummaryItem && <div data-test-id={`cardShipItem-${orderSummaryItemIndex}`} className="CardShipItemPage--container">
                 <div className="CardShipItemPage--container-header">
-                    <div className="title">Acne-Fighting Toner</div>
-                    <div className="subtitle">Tener Category</div>
+                    <div className="title">{orderSummaryItem.label}</div>
+                    <div className="subtitle">{orderSummaryItem.subtitle}</div>
                 </div>
                 <div className="CardShipItemPage--container-content">
-                    <div className="side-left"><img src="https://picsum.photos/500/500" /></div>
+                    <div className="side-left"><img src={orderSummaryItem.imgSrc} /></div>
                     <div className="side-right">
                         <div className="text">
                             {orderSummaryItem.description}
                         </div>
                         <div className="tags">
-                            {/*<div className="tag">{orderSummaryItem.tags[0]}</div>*/}
-                            <Chip label={orderSummaryItem.tags[0]} variant="outlined" />
+                            {orderSummaryItem.tags.map((r, index) => <Chip key={index} label={orderSummaryItem.tags[index]} variant="outlined" />)}
                         </div>
                         <div className="price-and-actions">
                             <div data-test-id={`cardShipItemPrice-${orderSummaryItemIndex}`} className="price">${orderSummaryItem.price.toFixed(2)}</div>

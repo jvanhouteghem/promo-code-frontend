@@ -1,3 +1,5 @@
+@import './src/app/globals';
+
 .root-layout {
   display: flex;
   justify-content: center;
@@ -7,48 +9,45 @@
 
 body {
   margin: unset;
-  background-color: #e1e1e1;
+  background-color: $color-grey;
 }
 
 .PromoCodePage--container {
   display: flex;
   flex-wrap: wrap;
 
-  gap: 20px;
-  padding: 40px;
+  gap: $spacing-m;
+  padding: $spacing-l;
   max-width: 1200px;
 
   @media (min-width:200px) {
-    padding: 10px;
-    gap: 20px 40px;
-    margin: 50px 0;
+    padding: $spacing-s;
+    gap: $spacing-m $spacing-l;
+    margin: $spacing-l 0;
   }
 
   .PromoCodePage--card-ship-items {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px 0;
+    gap: $spacing-m 0;
+
+
+    @media (min-width:600px) {
+      width: 600px;
+    }
   }
 
   .PromoCodePage--order-summary {
-    flex: 1;
+    @include card;
 
     @media (min-width:200px) {
       min-width: 350px;
     }
 
-    // TODO mixin
-    line-height: 1.5;
-    letter-spacing: 0;
-    font-weight: 400;
-    font-family: Arial;
-    box-sizing: inherit;
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-radius: 4px;
-    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
-    // overflow: hidden;
+    @media (max-width:1200px) {
+      flex: 1;
+    }
+
   }
 }

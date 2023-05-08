@@ -1,0 +1,26 @@
+// not exhaustive sample of vars
+$spacing-xs: 5px;
+$spacing-s: 10px;
+$spacing-m: 20px;
+$spacing-l: 40px;
+
+$font-s: 12px;
+$font-m: 16px;
+$font-l: 22px;
+
+$color-black: rgb(33, 33, 33);
+$color-grey: #e1e1e1;
+$color-white: #fff;
+
+@mixin card {
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-family: Arial;
+  box-sizing: inherit;
+  background-color: $color-white;
+  color: $color-black;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}

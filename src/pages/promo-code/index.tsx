@@ -10,6 +10,7 @@ export interface OrderSummaryItem {
     imgSrc: `http${string}`;
     quantity: number
     label: string;
+    subtitle: string;
     description: string;
     tags: string[],
     price: number;
@@ -22,7 +23,7 @@ export default function PromoCodePage(): JSX.Element {
 
     useEffect(() => {
         // setValue(OrderSummaryItemsMocked)
-        setOrderSummaryItems(value ?? []); // setOrderSummaryItems(value ?? OrderSummaryItemsMocked)
+        setOrderSummaryItems(value ?? []);
     }, [value, orderSummaryItems]);
 
     useEffect(() => {
