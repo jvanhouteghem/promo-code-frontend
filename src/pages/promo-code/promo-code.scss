@@ -31,16 +31,23 @@ body {
     display: flex;
     flex-direction: column;
     gap: $spacing-m 0;
+
+
+    @media (min-width:600px) {
+      width: 600px;
+    }
   }
 
   .PromoCodePage--order-summary {
-    flex: 1;
     @include card;
 
     @media (min-width:200px) {
       min-width: 350px;
     }
 
+    @media (max-width:1200px) {
+      flex: 1;
+    }
 
   }
 }
