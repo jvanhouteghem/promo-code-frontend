@@ -1,16 +1,7 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
-import {ChangeEvent, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Box, CircularProgress, TextField} from "@mui/material";
-
-// TODO add typing
-/*export interface PromoCodeValidatorAttributes {
-    label: string;
-    /!*error: boolean | null;*!/
-    helperText: string | null;
-    color: string | null;
-    focused: boolean | null;
-}*/
 
 export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
     const [promoCode, setPromoCode] = useState('')
