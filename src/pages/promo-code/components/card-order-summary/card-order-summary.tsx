@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {Box, Button, CircularProgress, TextField} from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
 
-export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
+export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: Function}): JSX.Element {
     const [promoCode, setPromoCode] = useState('');
     const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
@@ -110,6 +110,7 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
 
                 <div>
                     <Button disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="contained">Submit</Button>
+                    <Button onClick={resetOrders} type="button" disabled={isCheckingPromoCode} style={{width: '100%', margin: '10px 0'}} variant="outlined">reset</Button>
                 </div>
 
 

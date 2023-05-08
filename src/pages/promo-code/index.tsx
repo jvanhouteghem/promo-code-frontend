@@ -38,6 +38,10 @@ export default function PromoCodePage(): JSX.Element {
         setOrderSummaryItems(newOrders)
     }
 
+    function resetOrders() {
+        setValue(OrderSummaryItemsMocked)
+    }
+
     return (
         <>
             {/*<img src="/bg.png" alt="my image" />  style={{backgroundImage: `url('./bg.png')`}}*/}
@@ -51,7 +55,7 @@ export default function PromoCodePage(): JSX.Element {
                         )}
                     </div>
                     <div className="PromoCodePage--order-summary">
-                        <CardOrderSummaryPage orderSummaryItems={orderSummaryItems}/>
+                        <CardOrderSummaryPage orderSummaryItems={orderSummaryItems} resetOrders={resetOrders}/>
                     </div>
                 </div>
             </div>
