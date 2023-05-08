@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
+import {OrderSummaryItem} from "@/pages/promo-code";
 
-export function usePromoCodeInput(orderSummaryItems) {
+export function usePromoCodeInput(orderSummaryItems: OrderSummaryItem[]) {
     const [promoCode, setPromoCode] = useState('');
     const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
