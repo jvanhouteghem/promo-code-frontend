@@ -10,6 +10,7 @@ export interface OrderSummaryItem {
     imgSrc: `http${string}`;
     quantity: number
     label: string;
+    subtitle: string;
     description: string;
     tags: string[],
     price: number;
