@@ -34,7 +34,7 @@ export class PromoCodePo {
     }
 
     static getOrders(): OrderSummaryItem[] {
-        const orders = localStorage.getItem('orderSummaryItems');
+        const orders: string = localStorage.getItem('orderSummaryItems') ?? null;
         return orders ? JSON.parse(orders) : [];
     }
 
