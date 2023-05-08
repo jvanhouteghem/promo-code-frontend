@@ -1,5 +1,7 @@
 # promo-code-frontend
 
+![image](https://github.com/jvanhouteghem/promo-code-frontend/actions/workflows/deploy-main.yml/badge.svg)
+
 ## Architecture & technical choices:
 - **Typescript**: (cf: https://www.typescriptlang.org/why-create-typescript)
 - **NextJS**: One of the best tool at the moment to create a full-stack Web application
@@ -31,6 +33,7 @@
 ## Good practices: 
 - **Be careful about good error messages** ([link](https://uxplanet.org/how-to-write-good-error-messages-858e4551cd4))
 - **Folders clean architecture**
+- **Release & versioning**
 
 ## Inspiration sources UI UX:
 
