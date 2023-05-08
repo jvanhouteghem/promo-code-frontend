@@ -11,8 +11,7 @@ export enum PromoStatus {
 export interface PromoCode {
     id: number;
     code: string; // must be uniq
-    counter: number; // the number of time a promoCode could be applied
-    used: number; // number of used promoCodes
+    counter: number; // the number of time a promoCode could have been applied
     group: string; // each promo code are created by stack (group), example: WINTER_SALE
     validators?: any; // TODO
     value: any; // should contain a number value, or an object (ex {action: 'GRANT_GIFT', value: 'ebook-777'}} or a key etc.
@@ -33,9 +32,11 @@ export const PROMO_CODES: PromoCode[] = [
         id: 123456,
         code: 'promo10',
         counter: 10,
-        used: 5,
         group: 'WINTER_SALE',
-        validators: [{type: 'MIN_AMOUNT', value: 50}],
+        validators: [
+            {type: 'MIN_AMOUNT', value: 50},
+            {type: 'MAX_USED', value: 10}
+        ],
         value: {
             type: 'MULTIPLICATOR',
             amount: 0.1
@@ -49,7 +50,6 @@ export const PROMO_CODES: PromoCode[] = [
         id: 789112,
         code: 'promo50',
         counter: 10,
-        used: 5,
         group: 'WINTER_SALE',
         value: {
             type: 'MULTIPLICATOR',
@@ -64,7 +64,6 @@ export const PROMO_CODES: PromoCode[] = [
         id: 789112,
         code: 'promo20',
         counter: 10,
-        used: 5,
         group: 'WINTER_SALE',
         value: {
             type: 'MULTIPLICATOR',
