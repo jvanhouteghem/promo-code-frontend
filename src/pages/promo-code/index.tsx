@@ -16,16 +16,16 @@ export interface OrderSummaryItem {
 
 export default function PromoCodePage(): JSX.Element {
     const [value, setValue] = useLocalStorage('orderSummaryItems', null);
-    let [orderSummaryItems, setOrderSummaryItems] = useState(OrderSummaryItemsMocked);
+    let [orderSummaryItems, setOrderSummaryItems] = useState([] as OrderSummaryItem[]);
 
     useEffect(() => {
         // setValue(OrderSummaryItemsMocked)
         setOrderSummaryItems(value ?? []); // setOrderSummaryItems(value ?? OrderSummaryItemsMocked)
-    }, [orderSummaryItems]);
+    }, [value, orderSummaryItems]);
 
     const changeQuantity = (index: number, newQuantity: number) => {
-        const newItems = [...orderSummaryItems];
-        if (newQuantity > 0) {
+        const newItems: OrderSummaryItem[] = [...orderSummaryItems];
+        if (newItems.length > 0 && newQuantity > 0) {
             newItems[index].quantity = newQuantity;
             setOrderSummaryItems(newItems);
         }
