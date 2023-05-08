@@ -1,9 +1,9 @@
 import './promo-code.scss'
-import {CardShipItemPage} from "@/pages/promo-code/components/card-ship-item/card-ship-item";
-import {CardOrderSummaryPage} from "@/pages/promo-code/components/card-order-summary/card-order-summary";
 import {useEffect, useState} from "react";
 import {useLocalStorage} from "@/shared/hooks/local-storage.hook";
 import {OrderSummaryItemsMocked} from "../../../cypress/e2e/promo-code/promo-code.mock";
+import CardShipItemPage from "@/pages/promo-code/components/card-ship-item/card-ship-item";
+import CardOrderSummaryPage from "@/pages/promo-code/components/card-order-summary/card-order-summary";
 
 export interface OrderSummaryItem {
     imgSrc: `http${string}`;

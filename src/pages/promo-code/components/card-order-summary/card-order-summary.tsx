@@ -12,7 +12,7 @@ import {Box, CircularProgress, TextField} from "@mui/material";
     focused: boolean | null;
 }*/
 
-export function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
+export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
     const [promoCode, setPromoCode] = useState('')
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
         label:"Add promo code here.",

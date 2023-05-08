@@ -1,7 +1,7 @@
 import './card-ship-item.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
 
-export function CardShipItemPage(
+export default function CardShipItemPage(
     {orderSummaryItem, changeQuantity, orderSummaryItemIndex, removeOrder}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number, removeOrder: Function}
 ): JSX.Element {
     return (
