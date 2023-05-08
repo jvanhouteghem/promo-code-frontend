@@ -1,0 +1,88 @@
+@import './src/app/globals';
+
+.CardShipItemPage--container {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-m;
+  gap: $spacing-s;
+
+  .CardShipItemPage--container-header {
+    .title {
+      font-size: $font-l;
+      color: $color-black;
+    }
+    .subtitle {
+      color: $color-black;
+      font-size: $font-m;
+    }
+  }
+
+  .CardShipItemPage--container-content {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-m;
+
+    .side-left {
+      img {
+        width: 200px;
+        height: 200px;
+
+        @media (max-width:700px) {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    }
+    .side-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-s;
+
+      .text {
+        font-size: $font-m;
+        color: $color-black;
+
+        @media (max-width:700px) {
+          font-size: $font-s;
+        }
+      }
+      .tags {
+        display: flex;
+        .tag {
+          background-color: $color-white;
+          padding: $spacing-xs;
+          border-radius: $spacing-xs;
+        }
+      }
+      .price-and-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .price {
+          color: $color-black;
+          font-size: $font-l;
+          font-weight: bold;
+        }
+        .actions {
+          display: flex;
+          gap: $spacing-s;
+          justify-content: center;
+          align-items: center;
+          color: $color-black;
+          .action-icon {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .action-counter-button {}
+          .action-counter {
+            background-color: $color-white;
+          }
+        }
+      }
+    }
+  }
+}
