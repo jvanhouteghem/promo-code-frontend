@@ -28,7 +28,7 @@ export default function CardShipItemPage(
                             {orderSummaryItem.description}
                         </div>
                         <div className="tags">
-                            {orderSummaryItem.tags.map((r, index) => <Chip label={orderSummaryItem.tags[index]} variant="outlined" />)}
+                            {orderSummaryItem.tags.map((r, index) => <Chip key={index} label={orderSummaryItem.tags[index]} variant="outlined" />)}
                         </div>
                         <div className="price-and-actions">
                             <div data-test-id={`cardShipItemPrice-${orderSummaryItemIndex}`} className="price">${orderSummaryItem.price.toFixed(2)}</div>
