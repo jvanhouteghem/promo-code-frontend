@@ -2,48 +2,54 @@ import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
 import {useEffect, useState} from "react";
 import {Box, CircularProgress, TextField} from "@mui/material";
+import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
 
 export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
-    const [promoCode, setPromoCode] = useState('')
+    const [promoCode, setPromoCode] = useState('');
+    const [promoCodeFetched, setPromoCodeFetched] = useState<{ isValid?: boolean; result?: number; value?: any }>({});
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
         label:"Add promo code here.",
         error: null,
         helperText: null,
         color: null,
         focused: null
-    })
+    });
 
-    const [îsDebounce, setIsDebounce] = useState(false);
+
+    const [isCheckingPromoCode, setIsCheckingPromoCode] = useState(false);
     useEffect(() => {
         if (promoCode) {
             const handler = setTimeout(() => {
-                setIsDebounce(true);
-
-                setTimeout(() => {
-                    setIsDebounce(false);
+                setIsCheckingPromoCode(true);
+                const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
+                checkPromoCode(promoCode, sumWithoutPromo).then((data: any) => {
+                    setIsCheckingPromoCode(false);
+                    setPromoCodeFetched(data);
+                    console.log('promoCodeFetched', data)
                     if (!promoCode) {
+                        setPromoCodeFetched({});
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
-                    } else if (promoCode === 'promo') {
-                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: "A 10% discount has been applied!", color: "success", focused: true});
+                    } else if (data.isValid) {
+                        setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: false, helperText: `A ${data.value.amount * 100}% discount has been applied!`, color: "success", focused: true});
                     } else {
                         setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: true, helperText:"Please add a valid promo code.", color: null, focused: null});
                     }
-                }, 1500)
-
-            }, 500);
+                });
+            }, 850);
 
             return () => {
                 clearTimeout(handler);
             };
         } else {
+            setPromoCodeFetched({});
             setPromoCodeValidatorAttributes({...promoCodeValidatorAttributes, error: null, helperText: null, color: null, focused: null});
         }
-    }, [promoCode]);
+    }, [promoCode, orderSummaryItems]);
 
     function sum(orderSummaryItems: OrderSummaryItem[]): number {
-        const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
-        const isPromo = promoCodeValidatorAttributes?.error === false ? 0.9 : 1;
-        return orderSummaryItems ? sumWithoutPromo * isPromo : 0;
+        // console.log('sum - promoCodeFetched', promoCodeFetched)
+        const sumWithoutPromoo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0) ?? 0;
+        return promoCodeFetched.result ? promoCodeFetched.result : sumWithoutPromoo; // ? sumWithoutPromo * (1 - isPromo) : sumWithoutPromo;
     }
 
     function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -79,12 +85,13 @@ export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryI
                         <Box sx={{ m: 1, position: 'relative' }}>
                         <TextField
                             id="outlined-error-helper-text"
+                            disabled={isCheckingPromoCode}
                             value={promoCode}
                             onChange={event => handleChange(event)}
                             {...promoCodeValidatorAttributes}
                         />
                         {/*{promoCodeValidatorAttributes?.error === false && <div>✅</div>}*/}
-                        {îsDebounce && <CircularProgress
+                        {isCheckingPromoCode && <CircularProgress
                             size={30}
                             sx={{
                                 position: 'absolute',

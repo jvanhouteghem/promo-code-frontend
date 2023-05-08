@@ -11,8 +11,9 @@ export enum PromoStatus {
 export interface PromoCode {
     id: number;
     code: string; // must be uniq
-    counter: number; // the number of time a promoCode could be applied
+    counter: number; // the number of time a promoCode could have been applied
     group: string; // each promo code are created by stack (group), example: WINTER_SALE
+    validators?: any; // TODO
     value: any; // should contain a number value, or an object (ex {action: 'GRANT_GIFT', value: 'ebook-777'}} or a key etc.
     emittedDate: Date; // creation date
     fillDate: Date; // reconciliation date
@@ -29,24 +30,48 @@ export interface PromoCode {
 export const PROMO_CODES: PromoCode[] = [
     {
         id: 123456,
-        code: 'code0',
+        code: 'promo10',
         counter: 10,
-        group: 'group0',
-        value: 'value0',
-        emittedDate: new Date(),
-        fillDate: new Date(),
-        expiry: new Date(),
-        status: PromoStatus.OPEN
-    },
-    {
-        id: 789112,
-        code: 'code1',
-        counter: 10,
-        group: 'group1',
-        value: 'value1',
+        group: 'WINTER_SALE',
+        validators: [
+            {type: 'MIN_AMOUNT', value: 50},
+            {type: 'MAX_USED', value: 10}
+        ],
+        value: {
+            type: 'MULTIPLICATOR',
+            amount: 0.1
+        },
         emittedDate: new Date(),
         fillDate: new Date(),
         expiry: new Date(),
         status: PromoStatus.OPEN,
+    },
+    {
+        id: 789112,
+        code: 'promo50',
+        counter: 10,
+        group: 'WINTER_SALE',
+        value: {
+            type: 'MULTIPLICATOR',
+            amount: 0.5
+        },
+        emittedDate: new Date(),
+        fillDate: new Date(),
+        expiry: new Date(),
+        status: PromoStatus.OPEN,
+    },
+    {
+        id: 789112,
+        code: 'promo20',
+        counter: 10,
+        group: 'WINTER_SALE',
+        value: {
+            type: 'MULTIPLICATOR',
+            amount: 0.5
+        },
+        emittedDate: new Date(),
+        fillDate: new Date(),
+        expiry: new Date(),
+        status: PromoStatus.CANCELLED,
     }
 ]
