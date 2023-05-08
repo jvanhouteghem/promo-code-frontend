@@ -3,7 +3,7 @@ import {CardShipItemPage} from "@/pages/promo-code/components/card-ship-item/car
 import {CardOrderSummaryPage} from "@/pages/promo-code/components/card-order-summary/card-order-summary";
 import {useEffect, useState} from "react";
 import {useLocalStorage} from "@/shared/hooks/local-storage.hook";
-import {OrderSummaryItemsMocked} from "@/pages/promo-code/promo-code.mock";
+import {OrderSummaryItemsMocked} from "../../../cypress/e2e/promo-code/promo-code.mock";
 
 export interface OrderSummaryItem {
     imgSrc: `http${string}`;
@@ -19,8 +19,8 @@ export default function PromoCodePage(): JSX.Element {
     let [orderSummaryItems, setOrderSummaryItems] = useState(OrderSummaryItemsMocked);
 
     useEffect(() => {
-        // setValue(orderSummaryItemsMocked)
-        setOrderSummaryItems(value ?? []); // setOrderSummaryItems(value ?? [OrderSummaryItemsMocked])
+        // setValue(OrderSummaryItemsMocked)
+        setOrderSummaryItems(value ?? []); // setOrderSummaryItems(value ?? OrderSummaryItemsMocked)
     }, [orderSummaryItems]);
 
     const changeQuantity = (index: number, newQuantity: number) => {

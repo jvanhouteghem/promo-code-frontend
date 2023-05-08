@@ -17,10 +17,15 @@
 --------- TODO ---------
 - **CI/CD with git actions**
 
-## CORE Concepts
+## App CORE Concepts
 - DRY (ex: use header layout)
 - "Scaling" app
 - Clean console
+
+## Tests CORE concepts
+- Each test should have high order function to make them readable
+- custom data-test-id for selector (!data-cy) with uniq name
+- (DRY) all interactions should be in a Page Object file
 
 ## Good practices: 
 - **Be careful about good error messages** ([link](https://uxplanet.org/how-to-write-good-error-messages-858e4551cd4))

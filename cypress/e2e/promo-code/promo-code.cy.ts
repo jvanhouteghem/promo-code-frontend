@@ -1,23 +1,42 @@
-import {OrderSummaryItemsMocked} from "./../../../src/pages/promo-code/promo-code.mock";
-import {OrderSummaryItem} from "@/pages/promo-code";
+import {PromoCodePo} from "./promo-code.po";
 
-describe('promo-code', () => {
+describe('promo-code default values', () => {
     beforeEach(() => {
-        localStorage.setItem('orderSummaryItems', JSON.stringify(OrderSummaryItemsMocked));
-        cy.visit('/promo-code');
+        PromoCodePo.visit();
     })
 
     it('display the right number of cart items with the correct default values', () => {
-        const orders: OrderSummaryItem[] =  JSON.parse(localStorage.getItem('orderSummaryItems'));
-        // test number of displayed cards
-        cy.get('[data-test-id^="cardShipItem-"]').should('have.length', orders.length);
+        PromoCodePo.checkOrderItems(PromoCodePo.getOrders());
+    })
 
-        // test default values inside orders cards
-        for (let i = 0; i < orders.length; i++) {
-            cy.get(`[data-test-id="cardShipItemQuantityCounter-${i}"]`).should('have.text', orders[i].quantity);
-            cy.get(`[data-test-id="cardShipItemPrice-${i}"]`).should('have.text', `$${orders[i].price.toFixed(2)}`);
-        }
+    it('display the right summary result values', () => {
+        PromoCodePo.checkSummary(PromoCodePo.getOrders(),'$54.00')
+    })
+})
 
-        // test default value displayed in order summary
+describe('promo-code updating values', () => {
+    beforeEach(() => {
+        PromoCodePo.visit();
+    })
+
+    it('display the right number of cart items with the correct default values', () => {
+        PromoCodePo.checkOrderItems(PromoCodePo.getOrders());
+    })
+
+    it('display the right summary result values', () => {
+        PromoCodePo.checkSummary(PromoCodePo.getOrders(),'$54.00');
+    })
+
+    it('increment quantity of first item and check total x1', () => {
+        cy.get(`[data-test-id="cardShipItemQuantityIncrementButton-${0}"]`).click();
+        PromoCodePo.checkSummaryTotal(PromoCodePo.getOrders(),'$68.25')
+    })
+
+    it('increment quantity of first item and check total x3', () => {
+        cy.get(`[data-test-id="cardShipItemQuantityIncrementButton-${0}"]`).click();
+        cy.get(`[data-test-id="cardShipItemQuantityIncrementButton-${0}"]`).click();
+        cy.get(`[data-test-id="cardShipItemQuantityIncrementButton-${0}"]`).click();
+
+        PromoCodePo.checkSummaryTotal(PromoCodePo.getOrders(),'$96.75')
     })
 })

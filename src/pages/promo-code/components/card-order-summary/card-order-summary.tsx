@@ -74,11 +74,11 @@ export function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: Or
                         <div className="title">Order Summary</div>
                             {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, index: number) => (
                                 <div key={index} className="ship-item">
-                                    <div className="quantity-and-label">
+                                    <div data-test-id={`cardOrderSummaryShipItemLabelAndQty-${index}`} className="quantity-and-label">
                                         <div className="quantity">x{orderSummaryItem.quantity}</div>
                                         <div className="label">{orderSummaryItem.label}</div>
                                     </div>
-                                    <div className="price">${orderSummaryItem.price.toFixed(2)}</div>
+                                    <div data-test-id={`cardOrderSummaryShipItemPrice-${index}`}className="price">${orderSummaryItem.price.toFixed(2)}</div>
                                 </div>
                             ))}
                     </div>
@@ -106,7 +106,7 @@ export function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: Or
 
                 <div className="sum-total">
                     <div className="label">Order Total</div>
-                    <div className="price">${sum(orderSummaryItems).toFixed(2)}</div>
+                    <div data-test-id={"cardOrderSummaryTotal"} className="price">${sum(orderSummaryItems).toFixed(2)}</div>
                 </div>
 
                 <div>

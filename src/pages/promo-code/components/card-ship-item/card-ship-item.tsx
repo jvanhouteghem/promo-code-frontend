@@ -24,9 +24,9 @@ export function CardShipItemPage(
                             <div data-test-id={`cardShipItemPrice-${orderSummaryItemIndex}`} className="price">${orderSummaryItem.price.toFixed(2)}</div>
                             <div className="actions">
                                 <div onClick={() => removeOrder(orderSummaryItemIndex)} className="action-icon">🗑️</div>
-                                <button data-test-id={`cardShipItemQuantityIncrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</button>
+                                <button data-test-id={`cardShipItemQuantityDecrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity - 1)} className="action-counter-button">-</button>
                                 <div data-test-id={`cardShipItemQuantityCounter-${orderSummaryItemIndex}`} className="action-counter">{orderSummaryItem.quantity}</div>
-                                <button data-test-id={`cardShipItemQuantityDecrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</button>
+                                <button data-test-id={`cardShipItemQuantityIncrementButton-${orderSummaryItemIndex}`} onClick={() => changeQuantity(orderSummaryItemIndex, orderSummaryItem.quantity + 1)} className="action-counter-button">-</button>
                             </div>
                         </div>
                     </div>
