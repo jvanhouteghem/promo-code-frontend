@@ -24,7 +24,6 @@ export default function PromoCodePage(): JSX.Element {
     }, [value, orderSummaryItems]);
 
     useEffect(() => {
-        console.log('haaa', value)
         if (value.length == 0) {
             resetOrders();
         }
