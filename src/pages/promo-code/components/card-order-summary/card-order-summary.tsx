@@ -1,18 +1,9 @@
 import './card-order-summary.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
-import {ChangeEvent, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Box, CircularProgress, TextField} from "@mui/material";
 
-// TODO add typing
-/*export interface PromoCodeValidatorAttributes {
-    label: string;
-    /!*error: boolean | null;*!/
-    helperText: string | null;
-    color: string | null;
-    focused: boolean | null;
-}*/
-
-export function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
+export default function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: OrderSummaryItem[]}): JSX.Element {
     const [promoCode, setPromoCode] = useState('')
     const [promoCodeValidatorAttributes, setPromoCodeValidatorAttributes] = useState<any>({
         label:"Add promo code here.",
@@ -49,10 +40,10 @@ export function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: Or
         }
     }, [promoCode]);
 
-    function sum(OrderSummaryItems: OrderSummaryItem[]): number {
-        const sumWithoutPromo = OrderSummaryItems.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
+    function sum(orderSummaryItems: OrderSummaryItem[]): number {
+        const sumWithoutPromo = orderSummaryItems?.reduce((accumulator, currentValue) => accumulator + (currentValue.quantity * currentValue.price), 0);
         const isPromo = promoCodeValidatorAttributes?.error === false ? 0.9 : 1;
-        return sumWithoutPromo * isPromo
+        return orderSummaryItems ? sumWithoutPromo * isPromo : 0;
     }
 
     function handleChange(event: any) { // ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -72,7 +63,7 @@ export function CardOrderSummaryPage({orderSummaryItems}: {orderSummaryItems: Or
                 <div className="ship-items-container">
                     <div className="ship-items">
                         <div className="title">Order Summary</div>
-                            {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, index: number) => (
+                            {orderSummaryItems?.map((orderSummaryItem: OrderSummaryItem, index: number) => (
                                 <div key={index} className="ship-item">
                                     <div data-test-id={`cardOrderSummaryShipItemLabelAndQty-${index}`} className="quantity-and-label">
                                         <div className="quantity">x{orderSummaryItem.quantity}</div>

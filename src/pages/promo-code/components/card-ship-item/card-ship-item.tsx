@@ -1,12 +1,12 @@
 import './card-ship-item.scss'
 import {OrderSummaryItem} from "@/pages/promo-code";
 
-export function CardShipItemPage(
+export default function CardShipItemPage(
     {orderSummaryItem, changeQuantity, orderSummaryItemIndex, removeOrder}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number, removeOrder: Function}
 ): JSX.Element {
     return (
         <>
-            <div data-test-id={`cardShipItem-${orderSummaryItemIndex}`} className="CardShipItemPage--container">
+            {orderSummaryItem && <div data-test-id={`cardShipItem-${orderSummaryItemIndex}`} className="CardShipItemPage--container">
                 <div className="CardShipItemPage--container-header">
                     <div className="title">Acne-Fighting Toner</div>
                     <div className="subtitle">Tener Category</div>
@@ -31,7 +31,7 @@ export function CardShipItemPage(
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> }
         </>
     )
 }
