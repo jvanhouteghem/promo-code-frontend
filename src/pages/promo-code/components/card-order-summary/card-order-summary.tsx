@@ -75,7 +75,7 @@ export default function CardOrderSummaryPage({orderSummaryItems, resetOrders}: {
 
     return (
         <>
-            <form className="CardOrderSummmaryPage--container" onSubmit={event => handleSubmit(event)}>
+            <form className="CardOrderSummaryPage--container" onSubmit={event => handleSubmit(event)}>
                 <div className="ship-items-container">
                     <div className="ship-items">
                         <div className="title">Order Summary</div>

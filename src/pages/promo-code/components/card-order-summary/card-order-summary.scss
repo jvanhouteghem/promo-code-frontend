@@ -1,6 +1,6 @@
 @import './src/app/globals';
 
-.CardOrderSummmaryPage--container {
+.CardOrderSummaryPage--container {
   display: flex;
   flex-direction: column;
   padding: $spacing-m;
@@ -20,12 +20,6 @@
         .quantity-and-label {
           display: flex;
           gap: $spacing-m;
-          .quantity {
-
-          }
-          .label {
-
-          }
         }
       }
     }
