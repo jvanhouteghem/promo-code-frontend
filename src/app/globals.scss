@@ -12,10 +12,43 @@ $color-black: rgb(33, 33, 33);
 $color-grey: #e1e1e1;
 $color-white: #fff;
 
+$container-size-m: 600px;
+
 div {
   line-height: 1.5;
   letter-spacing: 0;
   font-weight: 400;
   font-family: Arial;
   color: $color-black;
+}
+
+body {
+  margin: unset;
+  background-color: $color-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  padding: $spacing-m;
+}
+
+aside {
+  .MuiCard-root {
+    height: 100%;
+  }
+
+  @media only screen and (max-device-width: 970px) {
+    width: $container-size-m;
+  }
+}
+
+section, article {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-m;
 }

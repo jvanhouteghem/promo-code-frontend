@@ -62,20 +62,22 @@ export default function PromoCodePage(): JSX.Element {
 
     return (
         <>
-            <div className="root-layout">
-                <div className="PromoCodePage--container">
-                    <div className="PromoCodePage--card-ship-items">
+            <main>
+                <section>
+                    <article className="cart-articles">
                         {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, orderSummaryItemIndex: number) =>
-                            <Card key={orderSummaryItemIndex} className="item">
+                            <Card key={orderSummaryItemIndex}>
                                 <ShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder} isRemoveOrderEnabled={isRemoveOrderEnabled}/>
                             </Card>
                         )}
-                    </div>
-                        <Card className="PromoCodePage--order-summary">
+                    </article>
+                    <aside>
+                        <Card>
                             <OrderSummaryPage orderSummaryItems={orderSummaryItems} resetOrders={resetOrders}/>
                         </Card>
-                </div>
-            </div>
+                    </aside>
+                </section>
+            </main>
 
 
             <Dialog
