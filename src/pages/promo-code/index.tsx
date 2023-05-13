@@ -2,9 +2,17 @@ import './promo-code.scss'
 import {useEffect, useState} from "react";
 import {useLocalStorage} from "@/shared/hooks/local-storage.hook";
 import {OrderSummaryItemsMocked} from "../../../cypress/e2e/promo-code/promo-code.mock";
-import CardShipItemPage from "@/pages/promo-code/components/card-ship-item/card-ship-item";
-import CardOrderSummaryPage from "@/pages/promo-code/components/card-order-summary/card-order-summary";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import ShipItemPage from "@/pages/promo-code/components/card-ship-item/card-ship-item";
+import OrderSummaryPage from "@/pages/promo-code/components/card-order-summary/card-order-summary";
+import {
+    Button,
+    Card,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle
+} from "@mui/material";
 
 export interface OrderSummaryItem {
     imgSrc: `http${string}`;
@@ -58,14 +66,14 @@ export default function PromoCodePage(): JSX.Element {
                 <div className="PromoCodePage--container">
                     <div className="PromoCodePage--card-ship-items">
                         {orderSummaryItems.map((orderSummaryItem: OrderSummaryItem, orderSummaryItemIndex: number) =>
-                            <div key={orderSummaryItemIndex} className="item">
-                                <CardShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder} isRemoveOrderEnabled={isRemoveOrderEnabled}/>
-                            </div>
+                            <Card key={orderSummaryItemIndex} className="item">
+                                <ShipItemPage orderSummaryItemIndex={orderSummaryItemIndex} orderSummaryItem={orderSummaryItem} changeQuantity={changeQuantity} removeOrder={removeOrder} isRemoveOrderEnabled={isRemoveOrderEnabled}/>
+                            </Card>
                         )}
                     </div>
-                    <div className="PromoCodePage--order-summary">
-                        <CardOrderSummaryPage orderSummaryItems={orderSummaryItems} resetOrders={resetOrders}/>
-                    </div>
+                        <Card className="PromoCodePage--order-summary">
+                            <OrderSummaryPage orderSummaryItems={orderSummaryItems} resetOrders={resetOrders}/>
+                        </Card>
                 </div>
             </div>
 

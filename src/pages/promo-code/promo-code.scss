@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   background-size: cover;
+  overflow: auto;
   height: 100vh;
 }
 
@@ -39,7 +40,6 @@ body {
   }
 
   .PromoCodePage--order-summary {
-    @include card;
 
     @media (min-width:200px) {
       min-width: 350px;
