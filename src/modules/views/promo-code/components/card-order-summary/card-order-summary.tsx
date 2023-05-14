@@ -7,7 +7,7 @@ import {
     TextField
 } from "@mui/material";
 import {checkPromoCode} from "@/pages/api/promo-code/services/promo-code.service";
-import {OrderSummaryItem} from "@/modules/views/promo-code/promo-code.hook";
+import {OrderSummaryItem} from "@/shared/schematics/cart/cart.hook";
 
 export default function OrderSummaryPage({orderSummaryItems, resetOrders}: {orderSummaryItems: OrderSummaryItem[]; resetOrders: any}): JSX.Element {
     const [promoCode, setPromoCode] = useState('');

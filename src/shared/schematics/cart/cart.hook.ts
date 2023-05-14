@@ -12,8 +12,16 @@ export interface OrderSummaryItem {
     price: number;
 }
 
-export function usePromoCode() {
-    const [value, setValue] = useLocalStorage('orderSummaryItems', null);
+export interface UsePromoCode {
+    orderSummaryItems: OrderSummaryItem[];
+    changeQuantity: Function;
+    removeOrder: Function;
+    isRemoveOrderEnabled: boolean;
+    resetOrders: Function
+}
+
+export function usePromoCode({value, setValue}: {value: any[], setValue?: Function}): UsePromoCode {
+    // const [value, setValue] = useLocalStorage('orderSummaryItems', null);
     const [orderSummaryItems, setOrderSummaryItems] = useState([] as OrderSummaryItem[]);
 
     const isRemoveOrderEnabled: boolean = orderSummaryItems?.length > 1;

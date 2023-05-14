@@ -1,7 +1,7 @@
 import './card-ship-item.scss'
 import {Button, Card, CardContent, Chip} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {OrderSummaryItem} from "@/modules/views/promo-code/promo-code.hook";
+import {OrderSummaryItem} from "@/shared/schematics/cart/cart.hook";
 
 export default function ShipItemPage(
     {orderSummaryItem, changeQuantity, orderSummaryItemIndex, removeOrder, isRemoveOrderEnabled}: {orderSummaryItem: OrderSummaryItem; changeQuantity: Function, orderSummaryItemIndex: number, removeOrder: Function, isRemoveOrderEnabled: boolean}
