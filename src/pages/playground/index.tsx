@@ -1,11 +1,3 @@
-import PromoCodeForm from "@/pages/playground/components/form";
-import './playground.scss'
+import PlaygroundPage from "@/modules/views/playground/playground";
 
-export default function PlaygroundPage(): JSX.Element {
-    return (
-        <>
-            PlaygroundPage
-            <PromoCodeForm />
-        </>
-    )
-}
+export default PlaygroundPage;

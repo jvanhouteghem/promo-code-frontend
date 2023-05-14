@@ -3,7 +3,7 @@ export async function checkPromoCode(promoCode: string, totalWithoutPromo: numbe
 
     return new Promise((resolve) => {
         setTimeout(async () => {
-            let res = await fetch(`http://localhost:3000/api/promo-code?code=${promoCode}&totalWithoutPromo=${totalWithoutPromo}`);
+            let res = await fetch(`${window.location.origin}/api/promo-code?code=${promoCode}&totalWithoutPromo=${totalWithoutPromo}`);
             resolve(await res.json() ?? null);
         }, timeout);
     });

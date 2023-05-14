@@ -1,5 +1,5 @@
-import {OrderSummaryItem} from "@/pages/promo-code";
 import {OrderSummaryItemsMocked} from "./promo-code.mock";
+import {OrderSummaryItem} from "@/modules/views/promo-code/promo-code.hook";
 
 export class PromoCodePo {
 

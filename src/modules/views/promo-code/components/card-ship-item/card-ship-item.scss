@@ -1,7 +1,6 @@
 @import './src/app/globals';
 
 .CardShipItemPage--container {
-  @include card;
   display: flex;
   flex-direction: column;
   padding: $spacing-m;
