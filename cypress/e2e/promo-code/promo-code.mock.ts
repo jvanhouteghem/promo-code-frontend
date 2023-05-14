@@ -1,4 +1,4 @@
-import {OrderSummaryItem} from "@/pages/promo-code";
+import {OrderSummaryItem} from "@/modules/views/promo-code/promo-code.hook";
 
 export const OrderSummaryItemsMocked: OrderSummaryItem[] = [
     {
