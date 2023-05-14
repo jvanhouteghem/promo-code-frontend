@@ -20,8 +20,10 @@ export interface UsePromoCode {
     resetOrders: Function
 }
 
-export function usePromoCode({value, setValue}: {value: any[], setValue?: Function}): UsePromoCode {
-    // const [value, setValue] = useLocalStorage('orderSummaryItems', null);
+export const CART_SCHEMATIC_LOCALSTORAGE_KEY = 'orderSummaryItems';
+
+export function useCartSchematic(): UsePromoCode {
+    const [value, setValue] = useLocalStorage(CART_SCHEMATIC_LOCALSTORAGE_KEY, null);
     const [orderSummaryItems, setOrderSummaryItems] = useState([] as OrderSummaryItem[]);
 
     const isRemoveOrderEnabled: boolean = orderSummaryItems?.length > 1;
@@ -30,12 +32,6 @@ export function usePromoCode({value, setValue}: {value: any[], setValue?: Functi
         // setValue(OrderSummaryItemsMocked)
         setOrderSummaryItems(value ?? []);
     }, [value, orderSummaryItems]);
-
-    useEffect(() => {
-        if (!value || value?.length === 0) {
-            resetOrders();
-        }
-    }, [])
 
     const changeQuantity = (index: number, newQuantity: number) => {
         const newItems: OrderSummaryItem[] = [...orderSummaryItems];
@@ -47,8 +43,11 @@ export function usePromoCode({value, setValue}: {value: any[], setValue?: Functi
 
     const removeOrder = (index: number) => {
         const newOrders: OrderSummaryItem[] = orderSummaryItems.filter((orderSummaryItem, orderSummaryItemIndex) => orderSummaryItemIndex !== index);
-        setValue(newOrders);
         setOrderSummaryItems(newOrders);
+
+        if (setValue) {
+            setValue(newOrders);
+        }
     }
 
     function resetOrders() {
