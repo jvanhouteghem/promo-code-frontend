@@ -114,12 +114,12 @@ export default function OrderSummaryPage({orderSummaryItems, resetOrders}: {orde
 
                 <div className="sum-raw">
                     <div className="label">Item sum</div>
-                    <div data-test-id={"cardOrderSummaryTotal"} className="price">${sumWithoutPromo(orderSummaryItems).toFixed(2)}</div>
+                    <div data-test-id={"cardOrderSummaryTotalRaw"} className="price">${sumWithoutPromo(orderSummaryItems).toFixed(2)}</div>
                 </div>
 
                 {promoCodeFetched.result && <div className="sum-raw">
                     <div className="label">Discount</div>
-                    <div data-test-id={"cardOrderSummaryTotal"}
+                    <div data-test-id={"cardOrderSummaryTotalDiscount"}
                          className="price">${(sumWithoutPromo(orderSummaryItems) - sum(orderSummaryItems)).toFixed(2)}</div>
                 </div>}
 
